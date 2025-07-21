@@ -1,0 +1,230 @@
+{% extends 'jewelry/base.html' %}
+{% block content %}
+<style>
+  body {
+    background: linear-gradient(135deg, #002540 0%, #1e3c72 100%);
+    min-height: 100vh;
+    font-family: 'Fraunces', 'Dancing Script', 'Alfa Slab One', cursive, sans-serif;
+    overflow-x: hidden;
+  }
+  .payment-container {
+    max-width: 500px;
+    margin: 100px auto 0 auto;
+    background: rgba(255,255,255,0.15);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    animation: fadeInUp 0.8s ease-out;
+  }
+  @keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .payment-container h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+  .payment-icon {
+    font-size: 2.5rem;
+    color: #60a5fa;
+    margin-bottom: 1rem;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+  .payment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  .payment-form input[type="number"],
+  .payment-form select {
+    width: 80%;
+    padding: 1rem 1.2rem;
+    border-radius: 12px;
+    border: 2px solid #3b82f6;
+    background: rgba(255,255,255,0.9);
+    font-size: 1.1rem;
+    color: #1e293b;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+  
+  .payment-form input[type="number"]:focus,
+  .payment-form select:focus {
+    border-color: #1d4ed8;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+  }
+  
+  .currency-select {
+    margin-bottom: 0.5rem;
+  }
+  .payment-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+  .pay-btn {
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: buttonGlow 2s infinite;
+    min-width: 200px;
+  }
+  .pay-btn:hover {
+    transform: translateY(-2px);
+  }
+  .pay-btn.razorpay {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    color: #ffffff;
+  }
+  .pay-btn.razorpay:hover {
+    background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+  }
+  .pay-btn.stripe {
+    background: linear-gradient(135deg, #6772e5 0%, #5469d4 100%);
+    color: #ffffff;
+  }
+  .pay-btn.stripe:hover {
+    background: linear-gradient(135deg, #5469d4 0%, #6772e5 100%);
+    box-shadow: 0 8px 25px rgba(103, 114, 229, 0.4);
+  }
+  @keyframes buttonGlow {
+    0%, 100% { box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); }
+    50% { box-shadow: 0 4px 25px rgba(59, 130, 246, 0.6); }
+  }
+  .success-animation {
+    display: none;
+    margin-top: 2rem;
+    animation: fadeIn 0.5s ease-out;
+  }
+  .success-animation.active {
+    display: block;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .payment-info {
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .payment-info p {
+    color: #ffffff;
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+  }
+</style>
+<div class="payment-container">
+  <div class="payment-icon"><i class="fas fa-credit-card"></i></div>
+  <h2>Make a Custom Payment</h2>
+  
+
+  
+  <form id="payment-form" class="payment-form">
+    <input type="hidden" id="currency" value="INR" />
+    <input type="number" id="amount" placeholder="Enter Amount" required min="1" step="0.01" />
+    <div class="payment-buttons">
+      <button type="button" class="pay-btn razorpay" onclick="payWithRazorpay()">
+        <i class="fas fa-credit-card"></i> Pay with Razorpay
+      </button>
+    </div>
+  </form>
+  <div id="payment-success" class="success-animation">
+    <svg width="80" height="80" viewBox="0 0 80 80">
+      <circle cx="40" cy="40" r="38" fill="#dbeafe" stroke="#3b82f6" stroke-width="4"/>
+      <polyline points="25,43 37,55 57,30" fill="none" stroke="#3b82f6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div style="font-size:1.3rem;color:#3b82f6;margin-top:1rem;font-weight:700;">Payment Successful!</div>
+  </div>
+</div><br><br>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+const successAnim = document.getElementById("payment-success");
+
+function payWithRazorpay() {
+  const currency = 'INR';
+  const amount = parseFloat(document.getElementById("amount").value);
+  
+  if (!amount || amount <= 0) {
+    alert("Please enter a valid amount");
+    return;
+  }
+  
+  let amountInSmallestUnit = Math.round(amount * 100);
+  
+  const button = document.querySelector('.pay-btn.razorpay');
+  button.disabled = true;
+  button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+  
+  fetch("/create-order/", {
+    method: "POST",
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ 
+      amount: amountInSmallestUnit,
+      currency: currency 
+    })
+  })
+  .then(response => {
+    if (!response.ok) {
+      return response.json().then(errorData => {
+        throw new Error(errorData.error || 'Payment creation failed');
+      });
+    }
+    return response.json();
+  })
+  .then(data => {
+    const options = {
+      key: "{{ razorpay_key_id }}",
+      amount: data.amount,
+      currency: data.currency,
+      name: "Raivat Stone",
+      description: "Custom Payment",
+      order_id: data.order_id,
+      handler: function (response) {
+        successAnim.classList.add("active");
+        document.getElementById("payment-form").style.display = "none";
+        setTimeout(() => {
+          document.getElementById("payment-form").reset();
+          document.getElementById("payment-form").style.display = "flex";
+          button.disabled = false;
+          button.innerHTML = '<i class="fas fa-credit-card"></i> Pay with Razorpay';
+          successAnim.classList.remove("active");
+        }, 3500);
+        alert("Payment successful! ID: " + response.razorpay_payment_id);
+      }
+    };
+    const rzp = new Razorpay(options);
+    rzp.open();
+    button.disabled = false;
+    button.innerHTML = '<i class="fas fa-credit-card"></i> Pay with Razorpay';
+  })
+  .catch(error => {
+    alert('Error: ' + error.message);
+    button.disabled = false;
+    button.innerHTML = '<i class="fas fa-credit-card"></i> Pay with Razorpay';
+  });
+}
+</script>
+{% endblock %}

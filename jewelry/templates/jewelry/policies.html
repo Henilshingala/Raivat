@@ -1,0 +1,411 @@
+{% extends 'jewelry/base.html' %}
+
+{% block title %}Privacy Policy{% endblock %}
+
+{% block extra_css %}
+<style>
+  :root {
+    --primary: #002540;
+    --accent: #4a90e2;
+    --light: #ffffff;
+    --dark: #1a1a1a;
+    --font: 'Segoe UI', sans-serif;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font);
+    background: linear-gradient(135deg,rgb(0, 25, 50),rgba(0, 37, 64, 0.75),rgba(0, 37, 64, 0.50),rgba(0, 37, 64, 0.75),rgb(0, 25, 50));
+    background-attachment: fixed;
+    color: var(--light);
+    line-height: 1.7;
+    min-height: 100vh;
+    animation: gradientShift 8s ease-in-out infinite;
+  }
+
+  @keyframes gradientShift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  header {
+    background: rgba(0, 37, 64, 0.9);
+    backdrop-filter: blur(10px);
+    color: var(--light);
+    padding: 2rem;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    animation: slideDown 0.8s ease-in-out;
+    border-bottom: 2px solid rgba(74, 144, 226, 0.3);
+  }
+
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0%);
+      opacity: 1;
+    }
+  }
+
+  header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow {
+    from {
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    to {
+      text-shadow: 0 2px 20px rgba(74, 144, 226, 0.5);
+    }
+  }
+
+  .container {
+    max-width: 900px;
+    margin: auto;
+    padding: 2rem;
+    animation: fadeIn 1.2s ease;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
+
+  section {
+    margin-bottom: 2.5rem;
+    background: rgba(0, 37, 64, 0.4);
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+    padding: 2rem;
+    border: 1px solid rgba(74, 144, 226, 0.2);
+    transition: all 0.3s ease;
+    animation: slideInUp 0.8s ease forwards;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  section:nth-child(1) { animation-delay: 0.1s; }
+  section:nth-child(2) { animation-delay: 0.2s; }
+  section:nth-child(3) { animation-delay: 0.3s; }
+  section:nth-child(4) { animation-delay: 0.4s; }
+  section:nth-child(5) { animation-delay: 0.5s; }
+  section:nth-child(6) { animation-delay: 0.6s; }
+  section:nth-child(7) { animation-delay: 0.7s; }
+  section:nth-child(8) { animation-delay: 0.8s; }
+  section:nth-child(9) { animation-delay: 0.9s; }
+
+  @keyframes slideInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    border-color: rgba(74, 144, 226, 0.5);
+  }
+
+  section h2 {
+    color: var(--accent);
+    border-left: 5px solid var(--accent);
+    padding-left: 15px;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+  }
+
+  section:hover h2 {
+    color: #ffffff;
+    border-left-color: #ffffff;
+  }
+
+  section p, section li {
+    margin-top: 0.8rem;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    transition: color 0.3s ease;
+  }
+
+  section:hover p, section:hover li {
+    color: #ffffff;
+  }
+
+  footer {
+    background: rgba(0, 37, 64, 0.9);
+    backdrop-filter: blur(10px);
+    color: var(--light);
+    text-align: center;
+    padding: 2rem 1rem;
+    font-size: 0.9rem;
+    margin-top: 3rem;
+    border-top: 2px solid rgba(74, 144, 226, 0.3);
+    animation: fadeInUp 1s ease 1s both;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  ul {
+    padding-left: 1.5rem;
+  }
+
+  ul li {
+    margin-bottom: 0.5rem;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  ul li::before {
+    content: '•';
+    color: var(--accent);
+    font-weight: bold;
+    position: absolute;
+    left: -1.2rem;
+    transition: all 0.3s ease;
+  }
+
+  section:hover ul li::before {
+    color: #ffffff;
+    transform: scale(1.2);
+  }
+
+  strong {
+    color: var(--accent);
+    transition: color 0.3s ease;
+  }
+
+  section:hover strong {
+    color: #ffffff;
+  }
+
+  .contact-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #4a90e2, #357abd, #2d5aa0);
+    color: white;
+    padding: 1.2rem 3rem;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+  }
+
+  .contact-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .contact-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(74, 144, 226, 0.5);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .contact-btn:hover::before {
+    left: 100%;
+  }
+
+  .contact-btn:active {
+    transform: translateY(-1px);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    body {
+      background-size: 200% 200%;
+    }
+
+    header {
+      padding: 1.5rem 1rem;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+    }
+
+    .container {
+      padding: 1rem;
+      margin: 0 0.5rem;
+    }
+
+    section {
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 10px;
+    }
+
+    section h2 {
+      font-size: 1.3rem;
+      padding-left: 10px;
+    }
+
+    section p, section li {
+      font-size: 0.95rem;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+    }
+
+    footer {
+      padding: 1.5rem 1rem;
+      font-size: 0.85rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    header h1 {
+      font-size: 1.5rem;
+    }
+
+    .container {
+      padding: 0.8rem;
+      margin: 0 0.3rem;
+    }
+
+    section {
+      padding: 1.2rem;
+      margin-bottom: 1.2rem;
+    }
+
+    section h2 {
+      font-size: 1.2rem;
+    }
+
+    section p, section li {
+      font-size: 0.9rem;
+    }
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+
+</style>
+{% endblock %}
+
+{% block content %}
+  <header>
+    <h1>Privacy Policy</h1>
+  </header>
+
+  <div class="container">
+    <section>
+      <p><strong>Effective Date:</strong> July 18, 2025</p>
+      <p>At <strong>Raivat Stones</strong>, we care about your privacy. This policy outlines how we handle your data when you browse our website or contact us via WhatsApp or email.</p>
+    </section>
+
+    <section>
+      <h2>1. What Information We Collect</h2>
+      <ul>
+        <li>Your Name</li>
+        <li>Email Address</li>
+        <li>Phone Number</li>
+        <li>Messages sent via WhatsApp or Email</li>
+        <li>Any additional info you voluntarily provide</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>2. How We Use Your Information</h2>
+      <p>We use your data to respond to your inquiries, share product details, and coordinate orders through WhatsApp or email. We do not use your data for automated marketing or third-party advertising.</p>
+    </section>
+
+    <section>
+      <h2>3. How We Collect It</h2>
+      <p>We only collect data when you:</p>
+      <ul>
+        <li>Send us a message on WhatsApp</li>
+        <li>Contact us via email</li>
+        <li>Fill out a contact form</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. Sharing Your Information</h2>
+      <p>We do not share or sell your information. Only when required (e.g. delivery), your data may be shared with logistics partners with your permission.</p>
+    </section>
+
+    <section>
+      <h2>5. Cookies & Analytics</h2>
+      <p>We may use basic cookies or analytics (like Google Analytics) to understand how users interact with the site. This data is anonymous and does not identify you personally.</p>
+    </section>
+
+    <section>
+      <h2>6. Your Rights</h2>
+      <ul>
+        <li>Request access or correction of your data</li>
+        <li>Request deletion of your personal info</li>
+        <li>Opt out of future communications</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>7. Security</h2>
+      <p>We take reasonable steps to secure your messages and data shared via email or WhatsApp. No sensitive information is stored on this website.</p>
+    </section>
+
+    <section>
+      <h2>8. Policy Updates</h2>
+      <p>This Privacy Policy may be updated. Any changes will appear here with an updated effective date.</p>
+    </section>
+
+    <section>
+      <h2>9. Contact Us</h2>
+      <p>If you have any questions about our privacy policy, please don't hesitate to reach out to us.</p>
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="{% url 'contact' %}" class="contact-btn">Contact Us</a>
+      </div>
+    </section>
+  </div>
+
+  
+{% endblock %}

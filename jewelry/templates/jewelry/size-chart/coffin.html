@@ -1,0 +1,44 @@
+{% extends 'jewelry/base.html' %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'jewelry/size-chart/shared-styles.css' %}">
+<section class="section">
+  <div class="header">
+    <h2>Professional Coffin Cut Diamond Size Chart</h2>
+    <div class="subtitle">Size Comparison Tool for Coffin Shaped Diamonds</div>
+    <div class="subtitle">Coffin Cut Diamond Conversion Chart 0.25 - 3.00 ct</div>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>CARAT WEIGHT</th>
+          <th>LENGTH MM SIZE</th>
+          <th>SHOULDER WIDTH MM SIZE</th>
+          <th>END WIDTH MM SIZE</th>
+          <th>DEPTH MM SIZE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>0.25 - 0.35 ct</td><td>5.00 - 5.50 mm</td><td>3.20 - 3.50 mm</td><td>2.00 - 2.20 mm</td><td>2.20 - 2.40 mm</td></tr>
+        <tr><td>0.36 - 0.45 ct</td><td>5.50 - 6.00 mm</td><td>3.50 - 3.80 mm</td><td>2.20 - 2.40 mm</td><td>2.40 - 2.60 mm</td></tr>
+        <tr><td>0.46 - 0.55 ct</td><td>6.00 - 6.50 mm</td><td>3.80 - 4.10 mm</td><td>2.40 - 2.60 mm</td><td>2.60 - 2.80 mm</td></tr>
+        <tr><td>0.56 - 0.75 ct</td><td>6.50 - 7.00 mm</td><td>4.10 - 4.40 mm</td><td>2.60 - 2.80 mm</td><td>2.80 - 3.00 mm</td></tr>
+        <tr><td>0.76 - 0.95 ct</td><td>7.00 - 7.50 mm</td><td>4.40 - 4.70 mm</td><td>2.80 - 3.00 mm</td><td>3.00 - 3.20 mm</td></tr>
+        <tr><td>0.96 - 1.25 ct</td><td>7.50 - 8.00 mm</td><td>4.70 - 5.00 mm</td><td>3.00 - 3.20 mm</td><td>3.20 - 3.40 mm</td></tr>
+        <tr><td>1.26 - 1.50 ct</td><td>8.00 - 8.50 mm</td><td>5.00 - 5.30 mm</td><td>3.20 - 3.40 mm</td><td>3.40 - 3.60 mm</td></tr>
+        <tr><td>1.51 - 1.75 ct</td><td>8.50 - 9.00 mm</td><td>5.30 - 5.60 mm</td><td>3.40 - 3.60 mm</td><td>3.60 - 3.80 mm</td></tr>
+        <tr><td>1.76 - 2.00 ct</td><td>9.00 - 9.50 mm</td><td>5.60 - 5.90 mm</td><td>3.60 - 3.80 mm</td><td>3.80 - 4.00 mm</td></tr>
+        <tr><td>2.01 - 2.25 ct</td><td>9.50 - 10.00 mm</td><td>5.90 - 6.20 mm</td><td>3.80 - 4.00 mm</td><td>4.00 - 4.20 mm</td></tr>
+        <tr><td>2.26 - 2.50 ct</td><td>10.00 - 10.50 mm</td><td>6.20 - 6.50 mm</td><td>4.00 - 4.20 mm</td><td>4.20 - 4.40 mm</td></tr>
+        <tr><td>2.51 - 2.75 ct</td><td>10.50 - 11.00 mm</td><td>6.50 - 6.80 mm</td><td>4.20 - 4.40 mm</td><td>4.40 - 4.60 mm</td></tr>
+        <tr><td>2.76 - 3.00 ct</td><td>11.00 - 11.50 mm</td><td>6.80 - 7.10 mm</td><td>4.40 - 4.60 mm</td><td>4.60 - 4.80 mm</td></tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="note">Note: Coffin cut diamonds feature an elongated hexagonal shape with tapered ends, similar to an elongated shield cut</div>
+</section>
+{% endblock %} 

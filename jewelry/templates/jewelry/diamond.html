@@ -1,0 +1,898 @@
+{% extends 'jewelry/base.html' %}
+{% load static %}
+
+{% block title %}
+  {% if selected_category %}
+    {{ selected_category.display_name }} Collection - Raivat
+  {% else %}
+    Exquisite Collections - Raivat
+  {% endif %}
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  body {
+    background: linear-gradient(135deg, rgb(0, 25, 50), rgba(0, 37, 64, 0.75), rgba(0, 37, 64, 0.50), rgba(0, 37, 64, 0.75), rgb(0, 25, 50)) !important;
+  }
+
+
+  .collections-hero {
+    background: linear-gradient(135deg, #002540 0%, #00254080 50%, #002540 100%);
+    color: #fff;
+    padding: 80px 20px 60px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .collections-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 50%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: linear-gradient(360deg,  #4079a2 0%, #ffffff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 30px rgba(0,37,64,0.3);
+    animation: titleGlow 3s ease-in-out infinite alternate;
+    letter-spacing: 2px;
+  }
+
+  @keyframes titleGlow {
+    0% { filter: drop-shadow(0 0 20px rgba(74,144,226,0.3)); }
+    100% { filter: drop-shadow(0 0 30px rgba(74,144,226,0.6)); }
+  }
+
+  .hero-subtitle {
+    font-size: 1.3rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+    font-weight: 300;
+    letter-spacing: 1px;
+    animation: fadeInUp 1s ease-out 0.5s both;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    margin-top: 20px;
+    animation: fadeInUp 1s ease-out 1s both;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .floating-elements {
+    display: none;
+  }
+
+  .products-section {
+    padding: 60px 20px;
+    background: transparent;
+    position: relative;
+  }
+
+  .products-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: transparent;
+    pointer-events: none;
+  }
+
+  .products-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+    animation: fadeInUp 1s ease-out 0.3s both;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #002540;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, #002540 0%, #002540 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-subtitle {
+    font-size: 1.1rem;
+    color: #64748b;
+    font-weight: 400;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+
+  @media (max-width: 1200px) {
+    .products-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .products-grid {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    
+    .products-section {
+      padding: 40px 15px;
+    }
+    
+    .product-card {
+      border-radius: 15px;
+    }
+    
+    .product-details {
+      padding: 20px 15px 15px 15px;
+    }
+    
+    .product-name {
+      font-size: 1.2rem;
+    }
+    
+    .product-specs {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .products-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    
+    .hero-title {
+      font-size: 2.5rem;
+    }
+    
+    .section-title {
+      font-size: 2rem;
+    }
+  }
+
+  @media (min-width: 1025px) {
+    .products-grid {
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 35px;
+    }
+    
+    .product-card {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
+
+  .product-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,37,64,0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    opacity: 0;
+    animation: cardAppear 0.8s ease forwards;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .product-card:nth-child(1) { animation-delay: 0.1s; }
+  .product-card:nth-child(2) { animation-delay: 0.2s; }
+  .product-card:nth-child(3) { animation-delay: 0.3s; }
+  .product-card:nth-child(4) { animation-delay: 0.4s; }
+  .product-card:nth-child(5) { animation-delay: 0.5s; }
+  .product-card:nth-child(6) { animation-delay: 0.6s; }
+
+  @keyframes cardAppear {
+    to {
+      opacity: 1;
+    }
+  }
+
+  .product-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(0,37,64,0.02) 0%, rgba(74,144,226,0.02) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+  }
+
+  .product-card:hover::before {
+    opacity: 1;
+  }
+
+  .product-card:hover {
+    box-shadow: 0 25px 60px rgba(0,37,64,0.3);
+    border: 2px solid #000;
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .product-card:hover .spec-item {
+    border: 1px solid #000;
+  }
+
+  .product-card:hover .material-tag,
+  .product-card:hover .diamond-tag,
+  .product-card:hover .ruby-tag,
+  .product-card:hover .sapphire-tag,
+  .product-card:hover .emerald-tag,
+  .product-card:hover .pearl-tag,
+  .product-card:hover .topaz-tag,
+  .product-card:hover .gemstone-tag {
+    border: 1px solid #000;
+  }
+
+  .product-card:hover .btn-buy {
+    border: 1px solid #000;
+  }
+
+  .product-image-container {
+    position: relative;
+    height: 280px;
+    overflow: hidden;
+    background: transparent;
+    border-radius: 12px;
+    margin: 5px 5px 0 5px;
+    padding: 0;
+  }
+
+  @media (max-width: 768px) {
+    .product-image-container {
+      height: 300px !important; 
+    }
+  }
+
+  @media (max-width: 480px) {
+    .product-image-container {
+      height: 300px !important; 
+    }
+  }
+
+  .product-image {
+    object-fit: cover;
+    transition: all 0.3s ease;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+  }
+
+
+  @media (max-width: 768px) {
+    .product-image {
+      border-radius: 10px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .product-image {
+      border-radius: 8px;
+    }
+  }
+
+  .product-card:hover .product-image {
+    border: 2px solid #000;
+  }
+
+  .product-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(255,107,107,0.3);
+    z-index: 2;
+    animation: badgePulse 2s ease-in-out infinite;
+  }
+
+  @keyframes badgePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  .product-details {
+    padding: 30px 25px 25px 25px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .product-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 15px;
+    line-height: 1.3;
+    letter-spacing: 0.5px;
+  }
+
+  .product-specs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  @media (min-width: 1025px) {
+    .product-specs {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+    
+    .spec-item {
+      font-size: 0.85rem;
+      padding: 6px 8px;
+    }
+    
+    .product-details {
+      padding: 25px 20px 20px 20px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .product-specs {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+  }
+
+  .spec-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    color: #000;
+    font-weight: 500;
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.8);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+  }
+
+  .spec-item:hover {
+    background: rgba(255,255,255,0.9);
+    transform: translateY(-2px);
+  }
+
+  .spec-icon {
+    font-size: 1.2rem;
+  }
+
+  .product-materials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 1024px) {
+    .product-materials {
+      gap: 6px;
+      margin-bottom: 15px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .product-materials {
+      gap: 5px;
+      margin-bottom: 12px;
+    }
+  }
+
+  .material-tag, .diamond-tag, .ruby-tag, .sapphire-tag, .emerald-tag, .pearl-tag, .topaz-tag, .gemstone-tag {
+    background: rgba(255, 255, 255, 0.9);
+    color: #000;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .material-tag:hover, .diamond-tag:hover, .ruby-tag:hover, .sapphire-tag:hover, .emerald-tag:hover, .pearl-tag:hover, .topaz-tag:hover, .gemstone-tag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  .diamond-tag { background: rgba(255,255,255,0.9); color: #000; border-color: rgba(0,0,0,0.2); }
+  .ruby-tag { background: rgba(255,255,255,0.9); color: #000; border-color: rgba(0,0,0,0.2); }
+  .sapphire-tag { background: rgba(255,255,255,0.9); color: #000; border-color: rgba(0,0,0,0.2); }
+  .emerald-tag { background: rgba(255,255,255,0.9); color: #000; border-color: rgba(0,0,0,0.2); }
+  .pearl-tag { background: rgba(255,255,255,0.9); color: #000; border-color: rgba(0,0,0,0.2); }
+  .topaz-tag { background: rgba(255,255,255,0.9); color: #000; border-color: rgba(0,0,0,0.2); }
+  .gemstone-tag { background: rgba(255,255,255,0.9); color: #000; border-color: rgba(0,0,0,0.2); }
+
+  .product-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .btn-buy {
+    flex: 1;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    background: linear-gradient(135deg, #002540 0%, #4a90e2 100%);
+    color: white;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(0,37,64,0.2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-buy::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.6s ease;
+  }
+
+  .btn-buy:hover::before {
+    left: 100%;
+  }
+
+  .btn-buy:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(0,37,64,0.3);
+  }
+
+  .btn-buy:active {
+    transform: translateY(-1px);
+  }
+
+  .btn-buy.whatsapp {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    box-shadow: 0 4px 15px rgba(37,211,102,0.3);
+  }
+
+  .btn-buy.whatsapp:hover {
+    box-shadow: 0 8px 25px rgba(37,211,102,0.4);
+  }
+
+  .no-products {
+    text-align: center;
+    padding: 80px 20px;
+    color: #fff;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,37,64,0.2);
+    margin: 40px auto 0 auto;
+    max-width: 600px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .no-products h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .no-products p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+    
+  .category-filter {
+    text-align: center;
+    margin: 30px 0;
+  }
+
+  .category-filter form {
+    display: inline-block;
+  }
+
+  .category-filter label {
+    font-weight: 600;
+    margin-right: 10px;
+  }
+
+  .category-filter select {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+
+  @media (max-width: 1200px) {
+    .products-grid {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .collections-hero {
+      padding: 60px 15px 40px 15px;
+      min-height: 250px;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+    }
+
+    .products-section {
+      padding: 40px 15px;
+    }
+
+    .products-grid {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .product-card {
+      border-radius: 15px;
+    }
+
+    .product-image-container {
+      height: 220px;
+    }
+
+    .product-details {
+      padding: 20px 18px 18px 18px;
+    }
+
+    .product-name {
+      font-size: 1.2rem;
+    }
+
+    .product-specs {
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .btn-buy {
+      padding: 12px 16px;
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-title {
+      font-size: 2rem;
+    }
+
+    .products-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .product-card {
+      border-radius: 12px;
+    }
+
+    .product-image-container {
+      height: 180px;
+    }
+
+    .product-details {
+      padding: 15px 12px 12px 12px;
+    }
+
+    .product-specs {
+      grid-template-columns: 1fr;
+    }
+
+    .product-actions {
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+
+.category-marquee-wrapper {
+  overflow: hidden;
+  width: 100%;
+  background: rgba(255,255,255,0.08);
+  margin: 0 0 30px 0;
+  padding: 10px 0;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,37,64,0.07);
+  position: relative;
+}
+
+.category-marquee {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  animation: marquee 30s linear infinite;
+  width: max-content;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.category-btn {
+  display: inline-block;
+  padding: 10px 28px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #002540 0%, #4a90e2 100%);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1rem;
+  border: none;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,37,64,0.08);
+  white-space: nowrap;
+}
+
+.category-btn.active,
+.category-btn:hover {
+  background: linear-gradient(135deg, #4a90e2 0%, #002540 100%);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0,37,64,0.13);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="collections-hero">
+  <div class="floating-elements">
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+  </div>
+  
+  <div class="hero-content">
+    <h1 class="hero-title">
+      {% if selected_category %}
+        {{ selected_category.display_name }} Collection
+      {% else %}
+        Exquisite Collections
+      {% endif %}
+    </h1>
+    <p class="hero-subtitle">
+      {% if selected_category %}
+        Discover our handcrafted {{ selected_category.display_name|lower }} masterpieces
+      {% else %}
+        Discover our handcrafted Jewelry masterpieces
+      {% endif %}
+    </p>
+    <div class="hero-badge">
+      {% if selected_category %}
+        {{ products.count }} Products Available
+      {% else %}
+        Premium Quality • Handcrafted • Authentic
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<div class="category-marquee-wrapper">
+  <div class="category-marquee">
+    <a href="{% url 'diamond' %}" class="category-btn{% if not selected_shape %} active{% endif %}">All</a>
+    {% for value, label in shape_choices %}
+      <a href="{% url 'diamond' %}?shape={{ value }}" class="category-btn{% if selected_shape == value %} active{% endif %}">{{ label }}</a>
+    {% endfor %}
+  </div>
+</div>
+
+<section class="products-section">
+  <div class="products-container">
+   
+
+    <div class="products-grid" id="productsGrid">
+      {% if products %}
+        {% for product in products %}
+          <div class="product-card">
+            <div class="product-image-container" style="height: 300px !important;">
+              {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+              {% else %}
+                <img src="{% static 'jewelry/images/rings.png' %}" alt="{{ product.name }}" class="product-image">
+              {% endif %}
+              {% if product.badge %}
+                <div class="product-badge">{{ product.get_badge_display }}</div>
+              {% endif %}
+            </div>
+            <div class="product-details">
+              <h3 class="product-name">{{ product.name }}</h3>
+              <div class="product-specs">
+                <div class="spec-item">
+                  <span class="spec-icon">💎</span>
+                  <span>{{ product.carat }} Carat</span>
+                </div>
+                <div class="spec-item">
+                  <span class="spec-icon">🔷</span>
+                  <span>{{ product.get_shape_display }}</span>
+                </div>
+                <div class="spec-item">
+                  <span class="spec-icon">🎨</span>
+                  <span>{{ product.color }}</span>
+                </div>
+                {% if product.certification %}
+                <div class="spec-item">
+                  <span class="spec-icon">📄</span>
+                  <span>{{ product.certification }}{% if product.certificate_number %} ({{ product.certificate_number }}){% endif %}</span>
+                </div>
+                {% endif %}
+              </div>
+              <div class="product-actions">
+                <button class="btn-buy buy-email-btn"
+                    data-name="{{ product.name|escapejs }}"
+                    data-carat="{{ product.carat|escapejs }}"
+                    data-shape="{{ product.get_shape_display|escapejs }}"
+                    data-color="{{ product.color|escapejs }}">
+                  Order by Email
+                </button>
+                <button class="btn-buy whatsapp buy-whatsapp-btn"
+                    data-name="{{ product.name|escapejs }}"
+                    data-carat="{{ product.carat|escapejs }}"
+                    data-shape="{{ product.get_shape_display|escapejs }}"
+                    data-color="{{ product.color|escapejs }}">
+                  Order on WhatsApp
+                </button>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="no-products">
+          <h3>No Products Available</h3>
+          <p>We're currently updating our collection. Please check back soon for our latest pieces!</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  const userIsAuthenticated = {{ user_is_authenticated|yesno:"true,false" }};
+  const loginUrl = "{% url 'login' %}";
+
+  function getOrderMessage(type, method, data) {
+    if (type === 'diamond') {
+      if (method === 'whatsapp') {
+        return `Hello, I am interested in purchasing this diamond from your website:\n\nName: ${data.name}\nCarat: ${data.carat}\nShape: ${data.shape}\nColor: ${data.color}\n\nCan you please provide me with:\n1. The price of this diamond\n2. How to purchase this diamond\n3. Payment methods available\n4. Delivery options and timeframes\n5. Any additional information about this diamond\n\nThank you!`;
+      } else {
+        return `Hello,\n\nI am interested in purchasing this diamond from your website:\n\nName: ${data.name}\nCarat: ${data.carat}\nShape: ${data.shape}\nColor: ${data.color}\n\nCan you please provide me with:\n1. The price of this diamond\n2. How to purchase this diamond\n3. Payment methods available\n4. Delivery options and timeframes\n5. Any additional information about this diamond\n\nPlease reply as soon as possible.\n\nThank you!`;
+      }
+    }
+    // fallback
+    return '';
+  }
+
+  function sendOrder(type, method, data) {
+    if (method === 'whatsapp') {
+      const phone = '918141963637';
+      const message = getOrderMessage(type, 'whatsapp', data);
+      const encodedMessage = encodeURIComponent(message);
+      const waLink = `https://wa.me/${phone}?text=${encodedMessage}`;
+      window.open(waLink, '_blank');
+    } else if (method === 'email') {
+      const email = 'info.raivatstones@gmail.com';
+      const subject = type === 'diamond' ? `I want to buy this diamond: ${data.name}` : `I want to buy this product: ${data.name}`;
+      const body = getOrderMessage(type, 'email', data);
+      const encodedSubject = encodeURIComponent(subject);
+      const encodedBody = encodeURIComponent(body);
+      const mailtoLink = `mailto:${email}?subject=${encodedSubject}&body=${encodedBody}`;
+      window.open(mailtoLink, '_blank');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const productCards = document.querySelectorAll('.product-card');
+    document.querySelectorAll('.buy-email-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        if (!userIsAuthenticated) {
+          window.location.href = loginUrl;
+          return;
+        }
+        const data = this.dataset;
+        sendOrder('diamond', 'email', data);
+      });
+    });
+    document.querySelectorAll('.buy-whatsapp-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        if (!userIsAuthenticated) {
+          window.location.href = loginUrl;
+          return;
+        }
+        const data = this.dataset;
+        sendOrder('diamond', 'whatsapp', data);
+      });
+    });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+    productCards.forEach(card => {
+      observer.observe(card);
+    });
+    productCards.forEach(card => {
+      card.addEventListener('mouseenter', function() {});
+      card.addEventListener('mouseleave', function() {});
+    });
+  });
+</script>
+{% endblock %}

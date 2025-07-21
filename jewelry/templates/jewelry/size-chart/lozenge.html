@@ -1,0 +1,44 @@
+{% extends 'jewelry/base.html' %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'jewelry/size-chart/shared-styles.css' %}">
+<section class="section">
+  <div class="header">
+    <h2>Professional Lozenge Cut Diamond Size Chart</h2>
+    <div class="subtitle">Size Comparison Tool for Lozenge Shaped Diamonds</div>
+    <div class="subtitle">Lozenge Cut Diamond Conversion Chart 0.15 - 2.50 ct</div>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>CARAT WEIGHT</th>
+          <th>LENGTH MM SIZE</th>
+          <th>WIDTH MM SIZE</th>
+          <th>DEPTH MM SIZE</th>
+          <th>ANGLE (DEGREES)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>0.15 - 0.24 ct</td><td>5.00 - 5.50 mm</td><td>2.80 - 3.10 mm</td><td>1.80 - 2.00 mm</td><td>60°</td></tr>
+        <tr><td>0.25 - 0.34 ct</td><td>5.50 - 6.00 mm</td><td>3.10 - 3.40 mm</td><td>2.00 - 2.20 mm</td><td>60°</td></tr>
+        <tr><td>0.35 - 0.44 ct</td><td>6.00 - 6.50 mm</td><td>3.40 - 3.70 mm</td><td>2.20 - 2.40 mm</td><td>60°</td></tr>
+        <tr><td>0.45 - 0.54 ct</td><td>6.50 - 7.00 mm</td><td>3.70 - 4.00 mm</td><td>2.40 - 2.60 mm</td><td>60°</td></tr>
+        <tr><td>0.55 - 0.69 ct</td><td>7.00 - 7.50 mm</td><td>4.00 - 4.30 mm</td><td>2.60 - 2.80 mm</td><td>60°</td></tr>
+        <tr><td>0.70 - 0.84 ct</td><td>7.50 - 8.00 mm</td><td>4.30 - 4.60 mm</td><td>2.80 - 3.00 mm</td><td>60°</td></tr>
+        <tr><td>0.85 - 0.99 ct</td><td>8.00 - 8.50 mm</td><td>4.60 - 4.90 mm</td><td>3.00 - 3.20 mm</td><td>60°</td></tr>
+        <tr><td>1.00 - 1.24 ct</td><td>8.50 - 9.00 mm</td><td>4.90 - 5.20 mm</td><td>3.20 - 3.40 mm</td><td>60°</td></tr>
+        <tr><td>1.25 - 1.49 ct</td><td>9.00 - 9.50 mm</td><td>5.20 - 5.50 mm</td><td>3.40 - 3.60 mm</td><td>60°</td></tr>
+        <tr><td>1.50 - 1.74 ct</td><td>9.50 - 10.00 mm</td><td>5.50 - 5.80 mm</td><td>3.60 - 3.80 mm</td><td>60°</td></tr>
+        <tr><td>1.75 - 1.99 ct</td><td>10.00 - 10.50 mm</td><td>5.80 - 6.10 mm</td><td>3.80 - 4.00 mm</td><td>60°</td></tr>
+        <tr><td>2.00 - 2.24 ct</td><td>10.50 - 11.00 mm</td><td>6.10 - 6.40 mm</td><td>4.00 - 4.20 mm</td><td>60°</td></tr>
+        <tr><td>2.25 - 2.50 ct</td><td>11.00 - 11.50 mm</td><td>6.40 - 6.70 mm</td><td>4.20 - 4.40 mm</td><td>60°</td></tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="note">Note: Lozenge cut diamonds feature a rhombus shape with pointed ends and equal angles of 60 degrees</div>
+</section>
+{% endblock %} 

@@ -1,0 +1,976 @@
+{% extends 'jewelry/base.html' %}
+{% load static %} 
+ {% block extra_css %}
+
+<head>
+  <meta charset="UTF-8">
+  <title>Lab Grown Diamonds - All You Need to Know</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+  <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Montserrat', Arial, sans-serif;
+  background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+  color: #003366;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-size: 15px;
+  min-height: 100vh;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+.animate-on-scroll.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+.section-top {
+  background: linear-gradient(135deg, #b3d9ff 0%, #cce6ff 100%);
+  padding: 80px 20px 60px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.section-top::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  animation: shimmer 3s infinite;
+}
+.section-top h1 {
+  font-size: 2.2em;
+  font-weight: 700;
+  margin: 0 0 30px 0;
+  color: #002540;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0,37,64,0.3);
+  animation: fadeInUp 1s ease-out;
+}
+.section-top p {
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 1.1em;
+  line-height: 1.7;
+  color: #003366;
+  font-weight: 500;
+  animation: fadeInUp 1s ease-out 0.3s both;
+}
+.section-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+  padding: 80px 20px 60px 20px;
+  background: #e6f0fa;
+  flex-wrap: wrap;
+}
+.diamond-img {
+  width: 360px;
+  max-width: 90vw;
+  height: auto;
+  filter: drop-shadow(0 15px 35px rgba(0,37,64,0.2));
+  transition: transform 0.3s ease;
+  animation: scaleIn 0.8s ease-out;
+}
+.diamond-img:hover {
+  transform: scale(1.05) rotate(2deg);
+}
+.bottom-text {
+  max-width: 520px;
+  text-align: left;
+  animation: fadeInRight 1s ease-out 0.5s both;
+}
+.bottom-text h2 {
+  font-size: 1.7em;
+  color: #002540;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  text-shadow: 1px 1px 2px rgba(0,37,64,0.2);
+}
+.bottom-text p {
+  font-size: 1em;
+  color: #003366;
+  line-height: 1.8;
+  margin: 0;
+  font-weight: 500;
+}
+.quotes-row {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 60px 20px 80px 20px;
+  background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+  flex-wrap: wrap;
+}
+.quote-card {
+  background: linear-gradient(135deg, #e6f0fa, #b3d9ff);
+  box-shadow: 0 12px 30px rgba(0,37,64,0.15);
+  border-radius: 12px;
+  padding: 36px 32px 32px 32px;
+  max-width: 380px;
+  min-width: 280px;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 0.98em;
+  color: #003366;
+  border: 2px solid #cce6ff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.quote-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #002540, #0066cc);
+}
+.quote-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,37,64,0.25);
+}
+.quote-card b, .quote-card strong {
+  font-weight: 700;
+  color: #002540;
+}
+.quote-card span {
+  display: block;
+  margin-top: 20px;
+  font-size: 1em;
+  color: #0066cc;
+  font-weight: 500;
+}
+.section-lab {
+  background: linear-gradient(135deg, #b3d9ff 0%, #cce6ff 100%);
+  padding: 80px 20px 80px 20px;
+  text-align: center;
+}
+.section-lab h1 {
+  font-size: 1.7em;
+  font-weight: 700;
+  margin: 0 0 40px 0;
+  color: #002540;
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 2px rgba(0,37,64,0.2);
+}
+.section-lab p {
+  max-width: 950px;
+  margin: 0 auto;
+  font-size: 1em;
+  line-height: 1.8;
+  color: #003366;
+  font-weight: 500;
+  text-align: center;
+}
+.section-table {
+  background: linear-gradient(135deg, #e6f0fa, #b3d9ff);
+  padding: 80px 20px 80px 20px;
+  text-align: center;
+}
+.section-table h2 {
+  font-size: 1.3em;
+  font-weight: 700;
+  margin: 0 0 40px 0;
+  color: #002540;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px rgba(0,37,64,0.2);
+}
+.diamond-table-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  overflow-x: auto;
+}
+.diamond-table {
+  border-collapse: collapse;
+  min-width: 850px;
+  max-width: 100%;
+  background: #e6f0fa;
+  font-size: 0.98em;
+  box-shadow: 0 8px 25px rgba(0,37,64,0.15);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.diamond-table th, .diamond-table td {
+  border: 1px solid #80c0ff;
+  padding: 16px 20px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+.diamond-table th {
+  background: linear-gradient(135deg, #0066cc, #002540);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.1em;
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+diamond-table td {
+  color: #003366;
+  font-weight: 500;
+  background: #e6f0fa;
+}
+.diamond-table tr:nth-child(even) td {
+  background: #f0f8ff;
+}
+.diamond-table tr:hover td {
+  background: #e6f3ff;
+}
+.diamond-table tr td:first-child, .diamond-table tr th:first-child {
+  text-align: left;
+  font-weight: 700;
+  background: linear-gradient(135deg, #cce6ff, #b3d9ff);
+  color: #002540;
+}
+.cs-container {
+  max-width: 1200px;
+  margin: 60px auto 0 auto;
+  padding: 0 20px;
+}
+.cs-row {
+  display: flex;
+  align-items: stretch;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 30px rgba(0,37,64,0.15);
+  border-radius: 15px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #e6f0fa, #b3d9ff);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid #e6f3ff;
+}
+.cs-row:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0,37,64,0.25);
+}
+.cs-label {
+  background: linear-gradient(135deg, #002540, #0066cc);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.1em;
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 10px;
+  letter-spacing: 1px;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+.cs-desc {
+  flex: 1;
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+  background: transparent;
+  color: #003366;
+  font-weight: 500;
+}
+.curve-divider {
+  width: 100%;
+  height: 100px;
+  background: none;
+  display: block;
+  margin: 60px 0 0 0;
+  padding: 0;
+  border: none;
+}
+.cvd-section {
+  max-width: 1200px;
+  margin: 0 auto 60px auto;
+  padding: 0 20px 60px 20px;
+  background: linear-gradient(135deg, #e6f0fa, #b3d9ff);
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,37,64,0.1);
+}
+.cvd-title {
+  font-size: 1.1em;
+  font-weight: 700;
+  color: #002540;
+  margin-bottom: 0;
+  margin-top: 0;
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 2px rgba(0,37,64,0.2);
+}
+.cvd-subtitle {
+  font-size: 1em;
+  font-weight: 600;
+  color: #0066cc;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.cvd-desc {
+  font-size: 1em;
+  color: #003366;
+  line-height: 1.8;
+  margin-top: 0;
+  font-weight: 500;
+}
+.section {
+  max-width: 1200px;
+  margin: 0 auto 60px auto;
+  padding: 60px 20px 0 20px;
+  background: linear-gradient(135deg, #e6f0fa, #b3d9ff);
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,37,64,0.1);
+}
+.section-title {
+  font-size: 1.2em;
+  font-weight: 700;
+  color: #002540;
+  margin-bottom: 0;
+  margin-top: 0;
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 2px rgba(0,37,64,0.2);
+}
+.section-subtitle {
+  font-size: 1em;
+  font-weight: 600;
+  color: #0066cc;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.section-desc {
+  font-size: 1em;
+  color: #003366;
+  line-height: 1.8;
+  margin-top: 0;
+  font-weight: 500;
+}
+.faq-block {
+  background: linear-gradient(135deg, #e6f0fa, #b3d9ff);
+  border-radius: 12px;
+  margin: 50px 0;
+  padding: 40px 35px 35px 35px;
+  max-width: 100%;
+  border: 2px solid #cce6ff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.faq-block:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,37,64,0.15);
+}
+.faq-title {
+  font-size: 1.1em;
+  font-weight: 700;
+  color: #002540;
+  margin: 0 0 20px 0;
+  text-shadow: 1px 1px 2px rgba(0,37,64,0.2);
+}
+.faq-desc {
+  font-size: 1em;
+  color: #003366;
+  margin: 0;
+  font-weight: 500;
+  line-height: 1.7;
+}
+.section-flex {
+  display: flex;
+  gap: 50px;
+  margin: 80px 0 0 0;
+  flex-wrap: wrap;
+}
+
+.grade-block {
+  flex: 1 1 360px;
+  background: linear-gradient(135deg, #e6f0fa, #b3d9ff);
+  border-radius: 15px;
+  padding: 40px 35px 35px 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 300px;
+  min-height: 240px;
+  box-sizing: border-box;
+  border: 2px solid #cce6ff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.grade-block:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,37,64,0.2);
+}
+.grade-title {
+  font-size: 1.1em;
+  font-weight: 700;
+  color: #002540;
+  margin: 0 0 20px 0;
+  text-shadow: 1px 1px 2px rgba(0,37,64,0.2);
+}
+.grade-desc {
+  font-size: 1em;
+  color: #003366;
+  margin-bottom: 30px;
+  margin-top: 0;
+  line-height: 1.8;
+  font-weight: 500;
+}
+
+
+.why-section {
+  background: linear-gradient(135deg, #b3d9ff 0%, #cce6ff 100%);
+  padding: 80px 20px 80px 20px;
+  text-align: center;
+}
+.why-title {
+  font-size: 2.5em;
+  font-weight: 700;
+  color: #002540;
+  margin: 0 0 40px 0;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px rgba(0,37,64,0.2);
+}
+.why-desc {
+  max-width: 950px;
+  margin: 0 auto;
+  font-size: 1.25em;
+  line-height: 1.8;
+  color: #003366;
+  font-weight: 500;
+  text-align: center;
+}
+.benefits-title {
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: 700;
+  color: #002540;
+  margin: 60px 0 40px 0;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px rgba(0,37,64,0.2);
+}
+.benefits-row {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 0 0 40px 0;
+  flex-wrap: wrap;
+}
+.benefit-card {
+  background: linear-gradient(135deg, #e6f0fa, #b3d9ff);
+  border-radius: 15px;
+  flex: 1 1 240px;
+  min-width: 240px;
+  max-width: 320px;
+  padding: 35px 20px 30px 20px;
+  text-align: center;
+  box-sizing: border-box;
+  margin: 0 0 15px 0;
+  border: 2px solid #b3d9ff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.benefit-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #002540, #0066cc);
+}
+.benefit-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0,37,64,0.2);
+}
+.benefit-card h3 {
+  font-size: 1.1em;
+  font-weight: 700;
+  margin: 0 0 18px 0;
+  color: #002540;
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 2px rgba(0,37,64,0.2);
+}
+.benefit-card p {
+  font-size: 0.98em;
+  color: #003366;
+  margin: 0;
+  font-weight: 500;
+  line-height: 1.6;
+}
+.igi-section {
+  background: linear-gradient(135deg, #e6f0fa, #b3d9ff);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 40px 40px 40px 40px;
+  margin: 50px 0 0 0;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 15px;
+  flex-wrap: wrap;
+  border: 2px solid #cce6ff;
+  box-shadow: 0 8px 25px rgba(0,37,64,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.igi-section:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0,37,64,0.15);
+}
+.igi-left {
+  flex: 2;
+  min-width: 240px;
+}
+.igi-title {
+  font-size: 1em;
+  font-weight: 700;
+  color: #002540;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 2px rgba(0,37,64,0.2);
+}
+.igi-desc {
+  font-size: 0.98em;
+  color: #003366;
+  font-weight: 500;
+  line-height: 1.7;
+}
+.igi-logo {
+  flex: 1;
+  min-width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 15px;
+}
+.igi-logo img {
+  height: 70px;
+  width: auto;
+  margin-right: 10px;
+  filter: drop-shadow(0 4px 8px rgba(0,37,64,0.2));
+}
+.igi-logo span {
+  font-size: 2.8em;
+  font-weight: 700;
+  color: #002540;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0,37,64,0.3);
+}
+
+
+
+
+
+.assoc-title {
+  text-align: center;
+  font-size: 1em;
+  font-weight: 700;
+  color: #002540;
+  margin: 60px 0 25px 0;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px rgba(0,37,64,0.2);
+}
+.assoc-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  background: #e6f0fa;
+  padding: 40px 0 40px 0;
+  border-top: 3px solid #cce6ff;
+  border-bottom: 3px solid #cce6ff;
+  flex-wrap: wrap;
+}
+.assoc-logo {
+  background: linear-gradient(135deg, #e6f0fa, #b3d9ff);
+  border-radius: 12px;
+  padding: 25px 35px;
+  min-width: 160px;
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  box-shadow: 0 5px 15px rgba(0,37,64,0.1);
+  border: 2px solid #e6f3ff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.assoc-logo:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,37,64,0.2);
+}
+.assoc-logo img {
+  max-width: 140px;
+  max-height: 70px;
+  width: auto;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0,37,64,0.1));
+}
+  
+.animated-fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+}
+.animated-fade-in.visible {
+  opacity: 1;
+  transform: none;
+}
+.animated-slide-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+}
+.animated-slide-left.visible {
+  opacity: 1;
+  transform: none;
+}
+.animated-slide-right {
+  opacity: 0;
+  transform: translateX(32px);
+  transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+}
+.animated-slide-right.visible {
+  opacity: 1;
+  transform: none;
+}
+.animated-scale-in {
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+}
+.animated-scale-in.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+.animated-hover {
+  transition: transform 0.35s cubic-bezier(.4,0,.2,1), box-shadow 0.35s cubic-bezier(.4,0,.2,1);
+}
+.animated-hover:hover {
+  transform: scale(1.04);
+  box-shadow: 0 12px 32px rgba(0,37,64,0.18);
+}
+.animated-glow {
+  box-shadow: 0 0 0 0 #80c0ff;
+  transition: box-shadow 0.6s cubic-bezier(.4,0,.2,1);
+}
+
+@media (max-width: 768px) {
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+  }
+
+  .mobile-scroll-fix {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .scale-wrapper {
+    transform: scale(0.75);
+    transform-origin: top left;
+    width: calc(100% / 0.75);
+    height: calc(100vh / 0.75);
+    overflow: auto;
+  }
+
+  body::after {
+    content: "";
+    display: block;
+    height: 1px;
+    width: 100%;
+    clear: both;
+  }
+
+  /* Optional font size tweaks */
+  .section-top h1 {
+    font-size: 2rem;
+  }
+
+  .section-top p,
+  .section p,
+  .diamond-card p {
+    font-size: 0.9rem;
+  }
+
+  .section h2 {
+    font-size: 1.8rem;
+  }
+
+  .cta-button {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+  }
+
+  .diamond-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .diamond-table th,
+  .diamond-table td {
+    padding: 12px;
+    font-size: 0.75rem;
+  }
+
+  .diamond-info {
+    flex-wrap: nowrap;
+  }
+
+  .diamond-card {
+    min-width: 250px;
+  }
+
+  .diamond-table {
+    min-width: 100%;
+    table-layout: fixed;
+  }
+
+  table {
+    width: 100%;
+    table-layout: fixed;
+  }
+}
+
+  </style>
+</head>  
+{% endblock %}
+
+{% block content %}
+<body>
+  <div class="mobile-scroll-fix">
+    <div class="scale-wrapper">
+      <section class="section-top animated-fade-in">
+        <h1 class="animated-scale-in">Are lab grown diamonds real ?</h1>
+        <p class="animated-fade-in">Lab grown diamonds are visually, chemically and physically identical to mined diamonds.<br>The only difference between lab grown diamonds and mined diamonds is the way they are formed. Mined diamonds are formed below the surface of the earth over millions of years, whereas lab grown diamonds are grown by scientists in a lab over a period of few weeks.</p>
+      </section>
+      <section class="section-bottom animated-slide-right">
+        <img class="diamond-img animated-scale-in animated-hover" src="{% static 'jewelry/images/daimond1.png' %}" alt="Diamond">
+        <div class="bottom-text animated-fade-in">
+          <h2 class="animated-scale-in">Yes! They are real</h2>
+          <p>The chemical, physical and optical properties are similar to mined diamonds and exhibit the same fire, scintillation, and sparkle.</p>
+        </div>
+      </section>
+      <section>
+        <div class="quotes-row">
+          <div class="quote-card animated-fade-in animated-hover"> <b>"[Manmade] diamonds are diamonds."</b> <span>Federal Trade Commission (USA), August 2018.</span> </div>
+          <div class="quote-card animated-fade-in animated-hover"> <b>"[Lab created diamonds] are not fakes. They're not cubic zirconia. They have all the same physical and chemical properties of a mined diamond."</b> <span>Stephen Morisseau, a spokesman for the Gemmological Institute of America (GIA).</span> </div>
+          <div class="quote-card animated-fade-in animated-hover"> <b>"Mined diamonds are a gift of nature whereas man-made diamonds are a gift of human wisdom."</b> <span>Shanghai Diamond Exchange's President Qiang Lin.</span> </div>
+        </div>
+        <div class="section-lab animated-slide-left">
+          <h1 class="animated-scale-in">What is a Lab&nbsp; Diamond?</h1>
+          <p class="animated-fade-in">Diamonds – a girl's best friend, come in two different forms. Some are found from below the ground, and some above. Unlike Natural Diamonds, which usually take millions of years to form, from just a chunk of coal, are found from the earth's surface. But CVD Diamonds are defined to be man-made diamonds, which are grown in labs, using a special process named 'Chemical Vapour Deposition.'<br><br>But many people still feel that lab-grown diamonds are fake. Which in fact is just a myth. Lab-grown diamonds are exactly the same physically, visually, and chemically and they prove to be 100 % real, leaving no mark of difference between the naturally produced ones and the lab-grown diamonds. They serve the same, best of the quality, design, texture, durability, clarity, and opulence.</p>
+        </div>
+      </section>
+      <br>
+      <section>
+        <div class="section-top animated-fade-in">
+          <h1 class="animated-scale-in">How are lab grown diamonds created?</h1>
+          <p class="animated-fade-in">CVD Diamonds, known as Lab-grown diamonds are made under the Chemical Vapour Deposition process, which begins with a diamond ' seed', a small natural fragment that undergoes extreme pressure and temperature. It fills with gases that are heavy in carbon and heated at high temperatures. The intense pressure and heat give rise to plasma, which are layers that help build a beautiful gemstone. But selecting the strongest natural diamond is essential for the production of lab-grown one.</p>
+          <p class="animated-fade-in">As India is changing tracks and running over the wheels of technological development, CVD Diamonds prove to be the greatest creation. These lab-grown diamonds simply replicate as the natural ones, in fact, are more affordable!</p>
+        </div>
+        <div class="section-table animated-slide-right">
+          <h2 class="animated-scale-in">Comparison Between Lab-Grown, Mined Diamonds and Simulants</h2>
+          <div class="diamond-table-container animated-glow">
+            <table class="diamond-table">
+              <tr>
+                <th>DIAMONDS</th>
+                <th>LAB-GROWN DIAMOND</th>
+                <th>MINED DIAMOND</th>
+                <th>CZ</th>
+                <th>MOISSANITE</th>
+              </tr>
+              <tr>
+                <td>Chemical Composition</td>
+                <td>C</td>
+                <td>C</td>
+                <td>ZrO<sub>2</sub></td>
+                <td>SiC</td>
+              </tr>
+              <tr>
+                <td>Cystalline Structure</td>
+                <td>CUBIC</td>
+                <td>CUBIC</td>
+                <td>CUBIC</td>
+                <td>HEXAGONAL</td>
+              </tr>
+              <tr>
+                <td>Reactive Index</td>
+                <td>2.42</td>
+                <td>2.42</td>
+                <td>2.20</td>
+                <td>2.65</td>
+              </tr>
+              <tr>
+                <td>Dispersion</td>
+                <td>0.044</td>
+                <td>0.044</td>
+                <td>.0066</td>
+                <td>.104</td>
+              </tr>
+              <tr>
+                <td>Hardness</td>
+                <td>10</td>
+                <td>10</td>
+                <td>8.25</td>
+                <td>9.25</td>
+              </tr>
+              <tr>
+                <td>Density</td>
+                <td>3.52</td>
+                <td>3.52</td>
+                <td>5.70</td>
+                <td>3.21</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="cs-container">
+          <div class="cs-row animated-slide-left animated-hover">
+            <div class="cs-label">CUT</div>
+            <div class="cs-desc">Cut (proportions, symmetry, and polish) is a measure of how a diamond's facets interact with light.</div>
+          </div>
+          <div class="cs-row animated-slide-right animated-hover">
+            <div class="cs-label">COLOR</div>
+            <div class="cs-desc">The color, higher the grade. Even the slightest hint can make a dramatic difference in value.</div>
+          </div>
+          <div class="cs-row animated-slide-left animated-hover">
+            <div class="cs-label">CLARITY</div>
+            <div class="cs-desc">Clarity grades assess the number, size, relief, and position of inclusions and blemishes</div>
+          </div>
+          <div class="cs-row animated-slide-right animated-hover">
+            <div class="cs-label">CARAT</div>
+            <div class="cs-desc">Carat weight means larger diamonds of the same quality are worth more per carat.</div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="cvd-section animated-fade-in">
+          <div class="cvd-title animated-scale-in">The CVD Method</div>
+          <div class="cvd-subtitle animated-fade-in">CVD stands for chemical vapor deposition</div>
+          <div class="cvd-desc animated-fade-in">Lab grown diamond seeds are loaded into a CVD reactor. Then, a mix of gasses containing carbon is added at a very low pressure. Microwave energy is used to heat the gases and generate a plasma. When the temperatures climb over several thousand degrees, the gas molecules break apart and carbon atoms bond to the seeds, growing them one layer at a time</div>
+        </div>
+      </section>
+      <section>
+        <div class="section animated-fade-in">
+          <div class="section-title animated-scale-in">The HPHT Method</div>
+          <div class="section-subtitle animated-fade-in">HPHT stands for high pressure high temperature</div>
+          <div class="section-desc animated-fade-in">This method mimics the conditions under which diamonds naturally form. Large mechanical presses are used to apply extreme pressure and high temperature to carbon in the presence of a diamond seed. The seeds act as a template for a lattice of carbon to grow layer by layer over the course of a few days.</div>
+          <div class="faq-block animated-slide-left animated-hover">
+            <div class="faq-title animated-scale-in">How long does it take to grow a diamond?</div>
+            <div class="faq-desc animated-fade-in">In nature, it takes millions of years for diamonds to form. In a lab, we can grow a one carat stone in about two weeks.</div>
+          </div>
+          <div class="section-title animated-scale-in" style="margin-top:60px;">How do you make colored lab-grown diamonds?</div>
+          <div class="section-desc animated-fade-in">One of the great advantages of lab-grown diamonds is that they can be made in an array of colors that are very rare when found in nature. This is achieved by making changes in the gas mix added to the CVD reactor combined with treatments to these stones applied at the end of the synthesis process. The process sounds simple, but it has taken our scientists thousands of hours to refine the process and create the perfect shades of light pink and blue every time.</div>
+          <div class="section-flex">
+            <div class="grade-block animated-fade-in animated-hover">
+              <div class="grade-title animated-scale-in">How are Lab Grown Diamonds Graded ?</div>
+              <div class="grade-desc animated-fade-in">Lab-grown diamonds can be graded in the same way as natural diamonds, by assessing the four C's of diamond quality: Cut, Color, Carat, Clarity. The GIA and IGI both offer dedicated reports using the same grading process as natural diamonds, whilst also specifying their origin as lab-grown. At Nishal Gems we do not individually certify each stone as we believe it's unnecessary. We see one of the major benefits of lab-grown diamonds to be the ability to consistently create high quality stones, therefore we guarantee all our stones reach our quality standards without the added cost of a third party certification. You are of course welcome to have your Nishal Gems stone graded post-purchase for your own peace of mind.</div>
+            </div>
+          </div>
+        </div>
+        <div class="why-section animated-slide-right">
+          <div class="why-title animated-scale-in">Why choose Lab-grown diamonds?</div>
+          <div class="why-desc animated-fade-in">In the 18th century the earliest source of the diamonds: India was depleted of it's treasure due to over extraction of these diamonds. The extraction process of these diamonds leaves deep scars on Earth and also leads to the emission of Carbon dioxide into our environment and acids into our ground water sources.<br>These lab grown diamonds and are created by professionals in labs with zero effect on the environment.</div>
+        </div>
+      </section>
+      <section>
+        <div class="benefits-title animated-scale-in">BENEFITS OF LAB-CREATED DIAMONDS</div>
+        <div class="benefits-row">
+          <div class="benefit-card animated-fade-in animated-hover">
+            <h3 class="animated-scale-in">Shine brighter</h3>
+            <p>Lab-grown diamonds are physically and optically identical to mined diamonds</p>
+          </div>
+          <div class="benefit-card animated-fade-in animated-hover">
+            <h3 class="animated-scale-in">Eco-friendly</h3>
+            <p>Diamond mining is causing a tremendous toll on our environment</p>
+          </div>
+          <div class="benefit-card animated-fade-in animated-hover">
+            <h3 class="animated-scale-in">Affordable</h3>
+            <p>Lab-grown diamonds are very less in price than mined diamonds</p>
+          </div>
+          <div class="benefit-card animated-fade-in animated-hover">
+            <h3 class="animated-scale-in">Conflict Free</h3>
+            <p>A lot of mined diamonds are sold in order to fund armed conflict</p>
+          </div>
+        </div>
+        <div class="igi-section animated-slide-left">
+          <div class="igi-left">
+            <div class="igi-title animated-scale-in">IGI CERTIFIED</div>
+            <div class="igi-desc animated-fade-in">All of our lab-grown diamonds are certified by a universally trusted certificate house, IGI.</div>
+          </div>
+          <div class="igi-logo animated-scale-in">
+            <img src="{% static 'jewelry/images/igi.png' %}" alt="IGI Logo">
+            <span>IGI</span>
+          </div>
+        </div>
+        <div class="assoc-title animated-scale-in">Associated With</div>
+        <div class="assoc-row">
+          <div class="assoc-logo animated-fade-in animated-hover">
+            <img src="{% static 'jewelry/images/gjepc.png' %}" alt="GJEPC India">
+          </div>
+          <div class="assoc-logo animated-fade-in animated-hover">
+            <img src="{% static 'jewelry/images/lg.png' %}" alt="Lab Grown Diamond Association Surat">
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <script>
+    function animateOnScroll() {
+      var animatedEls = document.querySelectorAll('.animated-fade-in, .animated-slide-left, .animated-slide-right, .animated-scale-in, .animated-glow');
+      var observer = new window.IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      animatedEls.forEach(function(el) { observer.observe(el); });
+    }
+    if ('IntersectionObserver' in window) {
+      animateOnScroll();
+    } else {
+      var els = document.querySelectorAll('.animated-fade-in, .animated-slide-left, .animated-slide-right, .animated-scale-in, .animated-glow');
+      els.forEach(function(el) { el.classList.add('visible'); });
+    }
+  </script>
+</body>
+{% endblock %}

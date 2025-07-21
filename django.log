@@ -1,0 +1,47 @@
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 76986
+"GET /static/jewelry/images/logo.png HTTP/1.1" 304 0
+"GET /static/jewelry/images/1.png HTTP/1.1" 304 0
+"GET /static/jewelry/images/2.png HTTP/1.1" 304 0
+"GET /static/jewelry/images/3.png HTTP/1.1" 304 0
+"GET /static/jewelry/images/4.png HTTP/1.1" 304 0
+"GET /static/jewelry/images/5.png HTTP/1.1" 304 0
+"GET /static/jewelry/images/6.png HTTP/1.1" 304 0
+"GET /static/jewelry/images/8.png HTTP/1.1" 304 0
+"GET /static/jewelry/images/7.png HTTP/1.1" 304 0
+"GET /static/jewelry/images/engagement.png HTTP/1.1" 304 0
+"GET /static/jewelry/images/wedding.png HTTP/1.1" 304 0
+"GET /static/jewelry/images/diamond.png HTTP/1.1" 304 0
+"GET /static/jewelry/images/dailywear.png HTTP/1.1" 304 0
+"GET /static/jewelry/images/bis-hallmark.png HTTP/1.1" 304 0
+"GET /static/jewelry/images/purity-guarantee.png HTTP/1.1" 304 0
+"GET /static/jewelry/images/certified-diamonds.png HTTP/1.1" 304 0
+"GET /static/jewelry/images/customization.png HTTP/1.1" 304 0
+"GET /static/jewelry/images/bgsf.png HTTP/1.1" 304 0
+"GET /static/jewelry/images/fedex.png HTTP/1.1" 200 22326
+"GET /static/jewelry/images/malca-amit.png HTTP/1.1" 200 5963
+"GET /static/jewelry/images/247.png HTTP/1.1" 200 213062
+"GET /static/jewelry/images/dhl.png HTTP/1.1" 200 19452
+"GET /static/jewelry/images/brinks.png HTTP/1.1" 200 36014
+"GET /static/jewelry/images/ferrari.png HTTP/1.1" 200 21254
+"GET /static/jewelry/images/sequel.png HTTP/1.1" 200 177443
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 16093
+"GET /static/jewelry/videos/bg.mp4 HTTP/1.1" 200 27897006
+"GET / HTTP/1.1" 200 76986
+"GET / HTTP/1.1" 200 76986
+- Broken pipe from ('127.0.0.1', 57799)
+"GET / HTTP/1.1" 200 76986
+- Broken pipe from ('127.0.0.1', 57803)
+"GET / HTTP/1.1" 200 76986
+- Broken pipe from ('127.0.0.1', 57801)
+"GET /static/jewelry/videos/bg.mp4 HTTP/1.1" 200 27897006
+"GET /about/ HTTP/1.1" 200 35551
+"GET /static/jewelry/images/founder.png HTTP/1.1" 200 29342
+"GET /category/ HTTP/1.1" 200 51229
+"GET /collections/?category=bracelets HTTP/1.1" 200 44976
+"GET /media/product_images/VisionEye_2025-07-04_132311_0000.png HTTP/1.1" 200 708661
+- Broken pipe from ('127.0.0.1', 57802)
+- Broken pipe from ('127.0.0.1', 57800)

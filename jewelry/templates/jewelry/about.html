@@ -1,0 +1,338 @@
+{% extends 'jewelry/base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    :root {
+        --primary: #002540;
+        --text-light: #ffffff;
+        --text-dark: #dddddd;
+        --accent: #ffffff;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Roboto', Arial, sans-serif;
+        background: linear-gradient(90deg, rgb(0, 25, 50), rgba(0, 37, 64, 0.75), rgba(0, 37, 64, 0.50), rgba(0, 37, 64, 0.75), rgb(0, 25, 50)) !important;
+        background-attachment: fixed;
+        color: var(--text-dark);
+        overflow-x: hidden;
+    }
+
+    .section1,
+    .section2,
+    .section3 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 48px;
+        padding: 64px 5vw;
+        max-width: 1400px;
+        margin: 0 auto;
+        opacity: 0;
+        transform: translateY(60px) scale(0.98);
+        filter: blur(8px);
+        transition: opacity 0.8s cubic-bezier(.77,0,.18,1), transform 0.8s cubic-bezier(.77,0,.18,1), filter 0.8s cubic-bezier(.77,0,.18,1);
+        will-change: opacity, transform, filter;
+    }
+    .section1.animated,
+    .section2.animated,
+    .section3.animated {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+    .section2 {
+        flex-direction: row-reverse;
+    }
+    .section-img {
+        flex: 1 1 40%;
+        max-width: 500px;
+        width: 100%;
+        height: auto;
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        object-fit: cover;
+        transition: transform 0.3s cubic-bezier(.77,0,.18,1), box-shadow 0.3s cubic-bezier(.77,0,.18,1);
+        opacity: 0;
+        transform: scale(0.95) translateY(40px);
+        filter: blur(6px);
+    }
+    .section1.animated .section-img,
+    .section2.animated .section-img,
+    .section3.animated .section-img {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        filter: blur(0);
+        transition-delay: 0.2s;
+    }
+    .section-img:hover {
+        transform: scale(1.05) translateY(-4px) rotate(-2deg);
+        box-shadow: 0 16px 32px rgba(0,0,0,0.25);
+    }
+    .section-content {
+        flex: 1 1 60%;
+        min-width: 280px;
+        color: var(--text-light);
+        opacity: 0;
+        transform: translateY(40px) scale(0.98);
+        filter: blur(6px);
+        transition: opacity 0.7s cubic-bezier(.77,0,.18,1), transform 0.7s cubic-bezier(.77,0,.18,1), filter 0.7s cubic-bezier(.77,0,.18,1);
+    }
+    .section1.animated .section-content,
+    .section2.animated .section-content,
+    .section3.animated .section-content {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+        transition-delay: 0.4s;
+    }
+    .section-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.8rem;
+        margin-bottom: 24px;
+        color: var(--accent);
+        line-height: 1.2;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s cubic-bezier(.77,0,.18,1), transform 0.6s cubic-bezier(.77,0,.18,1);
+    }
+    .section1.animated .section-title,
+    .section2.animated .section-title,
+    .section3.animated .section-title {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.55s;
+    }
+    .section-text {
+        font-size: 1.15rem;
+        line-height: 1.8;
+        margin-bottom: 32px;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s cubic-bezier(.77,0,.18,1), transform 0.6s cubic-bezier(.77,0,.18,1);
+    }
+    .section1.animated .section-text,
+    .section2.animated .section-text,
+    .section3.animated .section-text {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.7s;
+    }
+    .section4 {
+        min-height: 100vh;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background-attachment: fixed;
+        color: var(--accent);
+        padding: 0 5vw;
+        margin-top: 0;
+        opacity: 0;
+        transform: scale(0.98) translateY(40px);
+        filter: blur(8px);
+        transition: opacity 1.2s cubic-bezier(.77,0,.18,1), transform 1.2s cubic-bezier(.77,0,.18,1), filter 1.2s cubic-bezier(.77,0,.18,1);
+        will-change: opacity, transform, filter;
+    }
+    .section4.animated {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        filter: blur(0);
+    }
+    .hero-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 3rem;
+        font-weight: 500;
+        margin-bottom: 24px;
+        line-height: 1.2;
+        opacity: 0;
+        transform: translateY(40px) scale(0.98);
+        transition: opacity 1s cubic-bezier(.77,0,.18,1), transform 1s cubic-bezier(.77,0,.18,1);
+    }
+    .section4.animated .hero-title {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        transition-delay: 0.3s;
+    }
+    .hero-video {
+        width: 70vw;
+        max-width: 900px;
+        max-height: calc(60vh + 50px);
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(255, 255, 255, 0.12);
+        display: block;
+        object-fit: cover;
+        opacity: 0;
+        transform: scale(0.96) translateY(40px);
+        filter: blur(8px);
+        transition: opacity 1.2s cubic-bezier(.77,0,.18,1), transform 1.2s cubic-bezier(.77,0,.18,1), filter 1.2s cubic-bezier(.77,0,.18,1);
+    }
+    .section4.animated .hero-video {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        filter: blur(0);
+        transition-delay: 0.7s;
+    }
+    @media (max-width: 768px) {
+        .section1,
+        .section2,
+        .section3 {
+            flex-direction: column;
+            gap: 24px;
+            padding: 32px 4vw;
+        }
+        .section2 {
+            flex-direction: column;
+        }
+        .section-img {
+            flex: none;
+            max-width: 100%;
+            width: 100%;
+            height: 440px;
+            object-fit: cover;
+        }
+        .section-content {
+            flex: none;
+            width: 100%;
+            text-align: center;
+        }
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+        .section-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        .hero-title {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+        }
+        .hero-video {
+            width: 90vw;
+            height: 800px;
+            object-fit: cover;
+        }
+        .section4 {
+            padding: 0 4vw;
+            min-height: 80vh;
+            height: 80vh;
+        }
+    }
+    @media (max-width: 480px) {
+        .section1,
+        .section2,
+        .section3 {
+            padding: 24px 3vw;
+            gap: 20px;
+        }
+        .section-img {
+            height: 360px;
+        }
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+        .section-text {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .hero-title {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+        .hero-video {
+            width: 95vw;
+            height: 640px;
+            object-fit: cover;
+        }
+        .section4 {
+            padding: 0 3vw;
+            min-height: 70vh;
+            height: 70vh;
+        }
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .section1,
+        .section2,
+        .section3 {
+            gap: 32px;
+            padding: 48px 4vw;
+        }
+        .section-img {
+            max-width: 400px;
+        }
+        .section-title {
+            font-size: 2.4rem;
+        }
+        .section-text {
+            font-size: 1.1rem;
+        }
+        .hero-title {
+            font-size: 2.6rem;
+        }
+        .hero-video {
+            width: 75vw;
+        }
+    }
+</style>
+
+<div class="section1">
+    <img src="{% static 'jewelry/images/founder.png' %}" alt="Founder" class="section-img">
+    <div class="section-content">
+        <div class="section-title">About Us</div>
+        <div class="section-text">
+            Welcome to Raivat Stones, Grower of CVD lab-grown diamonds, with our headquarters in India, we take pride in being at the forefront of the diamond industry. Founded in 2017 by Mr. Akshat Chaudhary, Raivat Stones benefits from his 8 years of expertise gained through his association with Poojan Diamond. With the blessings of Bharatbhai Chaudhary, a co-founder of Poojan Diamond, Mr. Chaudhary embarks on a new journey in the lab-grown diamond industry.<br><br>From sourcing the seed to handcrafting beautiful jewelry ensure meticulous attention to detail every step of the way. Thank you for considering Raivat Stones for your CVD lab-grown diamond needs. We eagerly anticipate the opportunity to serve you and assist you in finding the perfect diamond for your requirements.
+        </div>
+    </div>
+</div>
+<div class="section2">
+    <img src="{% static 'jewelry/images/3.png' %}" alt="Jewelry Making" class="section-img">
+    <div class="section-content">
+        <div class="section-title">How We Became Raivat Stones</div>
+        <div class="section-text">
+            Currently, we are manufacturer, wholesaler and supplier of CVD & HPHT Lab-grown diamonds and hold the immense capacity to deliver all sizes of Type IIA, Conflict-Free & Ethically manufactured, Certified & Non-certified CVD & HPHT Lab-grown diamonds, to the B2B Clienteles, Retailers and jewelry Traders globally, by assuring them to supply these genuine diamonds at the best and affordable price with consistency in Quality as well as Quantity.<br><br>We offer various varieties of diamonds shapes such as Brilliant Round, Cushion, Heart, Marquise, Pear, Princess, Radiant, Square Radiant, Emerald and Oval. The color ranges from D to J, in the sizes starting from 0.30 to 6.00 Carats. Moreover, We are capable to tie up with clients for customized programs for specific ventures.
+        </div>
+    </div>
+</div>
+<div class="section3">
+    <img src="{% static 'jewelry/images/diamond.png' %}" alt="Diamond Craft" class="section-img">
+    <div class="section-content">
+        <div class="section-title">Certificate of Authenticity</div>
+        <div class="section-text">
+            Grown with cutting-edge technology and set with precision, each piece reflects our commitment to innovation, transparency, and timeless elegance. Whether you're celebrating love, a personal achievement, or just yourself, our diamonds are designed to shine with purpose and pride.<br><br>We believe jewelry is more than just adornment — it's an expression of love, heritage, and individuality. Our journey began with a passion for timeless beauty and a commitment to craftsmanship that turns every piece into a cherished memory. Experience the future of LabGrown jewelry — without compromise.
+        </div>
+    </div>
+</div>
+<div class="section4">
+    <div class="hero-title">Artisans of Love<sup>&reg;</sup></div>
+    <video class="hero-video" autoplay muted loop playsinline>
+        <source src="{% static 'jewelry/videos/bg.mp4' %}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+<script>
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animated');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.section1, .section2, .section3, .section4').forEach(section => {
+        section.classList.remove('animated');
+        observer.observe(section);
+    });
+</script>
+{% endblock %}

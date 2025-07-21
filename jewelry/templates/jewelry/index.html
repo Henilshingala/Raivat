@@ -1,0 +1,1990 @@
+{% extends 'jewelry/base.html' %}
+{% load static %}
+
+{% block title %}Raivat Stones - Home{% endblock %}
+
+{% block extra_css %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+    href="https://fonts.googleapis.com/css2?family=Bungee&family=Pacifico&family=Dancing+Script:wght@400;700&family=Caveat:wght@400;700&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Delius+Swash+Caps&family=Alumni+Sans+Pinstripe:ital@0;1&display=swap"
+    rel="stylesheet">
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        overflow-x: hidden;
+    }
+
+    html,
+    body {
+        width: 100vw;
+        max-width: 100vw;
+        overflow-x: hidden !important;
+    }
+
+    .hero-container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero-video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 37, 64, 0.502);
+        z-index: 1;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        color: white;
+        text-align: center;
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .hero-title {
+        font-family: "DM Serif Text", serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 4rem;
+        padding-top: 20%;
+        letter-spacing: 0.1em;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-subtitle {
+        padding-bottom: 25%;
+        font-family: "Pacifico", cursive;
+        font-size: 1.5rem;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .container {
+        width: 100%;
+        max-width: 1920px;
+        margin: 0 auto;
+        padding: 20px;
+        overflow-x: hidden;
+    }
+
+    .container h2 {
+        text-align: center;
+        color: #002540;
+        font-family: "Dancing Script", cursive;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 30px;
+        animation: fadeInUp 0.8s ease-out;
+        text-shadow: 2px 2px 4px rgba(0, 37, 64, 0.1);
+        letter-spacing: 1px;
+    }
+
+    .grid {
+        background: #00254080;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 30px;
+        border: 3px solid #004080;
+        border-radius: 24px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        box-sizing: border-box;
+        animation: fadeInUp 0.8s ease-out 0.3s both;
+    }
+
+    .card {
+        border-radius: 16px;
+        background: rgb(0, 0, 0);
+        width: 100%;
+        height: 175px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        padding: 20px;
+        box-sizing: border-box;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 3px solid #004080;
+        position: relative;
+        overflow: hidden;
+        animation: fadeInUp 0.6s ease-out;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .card:hover {
+        border: 4px solid #0066cc;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .card img {
+        width: 90%;
+        height: 90%;
+        object-fit: contain;
+        display: block;
+        border: none;
+        margin: 0;
+        padding: 0;
+        border-radius: 12px;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        z-index: 1;
+        position: relative;
+    }
+
+    .category-title {
+        color: #002540;
+        text-align: center;
+        font-family: "Dancing Script", cursive;
+        font-weight: 700;
+        font-size: 2.2rem;
+        margin: 40px 0 20px;
+    }
+
+    .category-subtitle {
+        color: #505050;
+        text-align: center;
+        font-size: 25px;
+        font-family: "Caveat", cursive;
+        font-weight: 400;
+        margin-bottom: 40px;
+    }
+
+    .category-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 0;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .category-col {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .category-item {
+        position: relative;
+        width: 100%;
+        border-radius: 25px;
+        overflow: hidden;
+        border: 3px solid rgba(0, 37, 64);
+        box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.5);
+    }
+
+    .category-item.wedding {
+        height: 382px;
+        width: 100%;
+    }
+
+    .category-item.gold {
+        height: 300px;
+        width: 100%;
+    }
+
+    .category-item.diamond {
+        height: 300px;
+        width: 100%;
+    }
+
+    .category-item.daily {
+        height: 382px;
+        width: 100%;
+    }
+
+    .category-item img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .category-label {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        border-radius: 0 0 25px 25px;
+        padding: 20px 0 15px;
+        text-align: center;
+        font-size: 22px;
+        font-weight: bold;
+        color: rgba(0, 46, 73, 0);
+        z-index: 2;
+        transition: background 35s ease;
+    }
+
+    .category-item:hover .category-label {
+        background: linear-gradient(360deg,
+                rgba(0, 37, 64, 1),
+                rgba(0, 40, 67, 0.85),
+                rgba(0, 43, 70, 0.70),
+                rgba(0, 46, 73, 0.45),
+                rgba(0, 49, 76, 0.2));
+        color: white;
+    }
+
+
+    @media (max-width: 767px) {
+        .category-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 8px;
+            padding: 8px;
+        }
+
+        .category-item {
+            height: 120px !important;
+            width: 100% !important;
+        }
+
+        .category-label {
+            font-size: 1rem;
+            padding: 8px 0 6px;
+        }
+    }
+
+    .assurance-section {
+        background: transparent;
+        padding: 60px 20px;
+        margin: 40px 0;
+        position: relative;
+        overflow: hidden;
+        animation: fadeInUp 0.8s ease-out 0.5s both;
+    }
+
+    .assurance-content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .assurance-title {
+        font-family: "Fraunces", serif;
+        font-optical-sizing: auto;
+        font-weight: 600;
+        font-style: italic;
+        font-variation-settings: "SOFT" 100, "WONK" 1;
+        color: #002540;
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        letter-spacing: 1px;
+        animation: fadeInUp 0.8s ease-out;
+        text-shadow: 2px 2px 4px rgba(0, 37, 64, 0.1);
+    }
+
+    .assurance-desc {
+        color: #333;
+        font-size: 1.2rem;
+        margin-bottom: 3rem;
+        font-weight: 400;
+        animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    .assurance-items {
+        width: 100%;
+        overflow: visible;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .assurance-items-inner {
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+        margin-top: 30px;
+        width: auto;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .assurance-item {
+        flex: 0 0 auto;
+        min-width: 200px;
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        border: 1px solid rgba(0, 37, 64, 0.15);
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        animation: slideInUp 0.6s ease-out;
+        position: relative;
+        overflow: visible;
+        box-shadow: 0 8px 25px rgba(0, 37, 64, 0.1);
+    }
+
+    .assurance-item:nth-child(1) {
+        animation-delay: 0.1s;
+    }
+
+    .assurance-item:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .assurance-item:nth-child(3) {
+        animation-delay: 0.3s;
+    }
+
+    .assurance-item:nth-child(4) {
+        animation-delay: 0.4s;
+    }
+
+    .assurance-item:nth-child(5) {
+        animation-delay: 0.5s;
+    }
+
+    .assurance-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(0, 37, 64, 0.05), rgba(0, 37, 64, 0.02));
+        border-radius: 20px;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        z-index: -1;
+    }
+
+    .assurance-item:hover {
+        background: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 15px 35px rgba(0, 37, 64, 0.2);
+        border-color: rgba(0, 37, 64, 0.3);
+        transform: translateY(-8px) scale(1.02);
+    }
+
+    .assurance-item:hover::before {
+        opacity: 1;
+    }
+
+    .assurance-icon {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 2;
+    }
+
+    .assurance-item:hover .assurance-icon {
+        transform: scale(1.3) translateY(-50px);
+    }
+
+    .assurance-icon img {
+        width: 150px;
+        height: 150px;
+        object-fit: contain;
+        max-width: 150px;
+        max-height: 150px;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        transition: all 0.3s ease;
+    }
+
+    .assurance-item:hover .assurance-icon img {
+        filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+    }
+
+    .assurance-item p {
+        color: #002540;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 0;
+        text-align: center;
+        transition: color 0.3s ease;
+        font-family: "Alumni Sans Pinstripe", sans-serif;
+        letter-spacing: 0.5px;
+    }
+
+    .assurance-item:hover p {
+        color: #001a2e;
+        transform: scale(1.05);
+    }
+
+    .story-section {
+        margin: 60px 0;
+        width: 100%;
+    }
+
+    .story-image {
+        position: relative;
+        width: 100%;
+        height: 500px;
+        overflow: hidden;
+        border-radius: 20px;
+    }
+
+    .story-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .story-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(0, 37, 64, 0.7) 0%, rgba(0, 26, 46, 0.8) 100%);
+    }
+
+    .story-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: white;
+        z-index: 2;
+    }
+
+    .story-content h2 {
+        font-family: "Delius Swash Caps", cursive;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        letter-spacing: 2px;
+    }
+
+    .story-content p {
+        font-family: "Alumni Sans Pinstripe", sans-serif;
+        font-weight: 400;
+        font-style: italic;
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+    }
+
+    .story-btn {
+        display: inline-block;
+        padding: 12px 30px;
+        background: transparent;
+        border: 2px solid white;
+        color: white;
+        text-decoration: none;
+        border-radius: 15px;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .story-btn:hover {
+        background: white;
+        color: #002540;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @media (min-width: 1440px) {
+        .grid {
+            background: #00254080;
+            max-width: 1400px;
+            padding: 40px;
+            gap: 20px;
+            border-radius: 30px;
+        }
+
+        .card {
+            height: 222px;
+            padding: 25px;
+            border-radius: 20px;
+        }
+
+        .container h2 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+        }
+    }
+
+    @media (max-width: 1439px) and (min-width: 1200px) {
+        .grid {
+            background: #00254080;
+            max-width: 1200px;
+            padding: 30px;
+            gap: 16px;
+            border-radius: 24px;
+        }
+
+        .card {
+            height: 222px;
+            border-radius: 16px;
+        }
+
+        .container h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+    }
+
+    @media (max-width: 1199px) and (min-width: 992px) {
+        .grid {
+            background: #00254080;
+            max-width: 1000px;
+            padding: 25px;
+            gap: 14px;
+            border-radius: 20px;
+        }
+
+        .card {
+            height: 222px;
+            padding: 18px;
+            border-radius: 14px;
+        }
+
+        .container h2 {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+        }
+    }
+
+    @media (max-width: 991px) and (min-width: 768px) {
+        .grid {
+            background: #00254080;
+            max-width: 750px;
+            padding: 20px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            border-radius: 18px;
+        }
+
+        .card {
+            border-radius: 16px;
+            height: 140px;
+            padding: 15px;
+            border-radius: 12px;
+        }
+
+
+        .container h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+    }
+
+    @media (max-width: 767px) and (min-width: 576px) {
+        .container {
+            padding: 15px;
+        }
+
+        .grid {
+            background: #00254080;
+            max-width: 550px;
+            padding: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            border-radius: 18px;
+            border: 3px solid #004080;
+        }
+
+        .card {
+            border-radius: 14px;
+            height: 140px;
+            padding: 15px;
+            border: 3px solid #004080;
+            background: rgb(0, 0, 0);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .container h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+    }
+
+    @media (max-width: 575px) {
+        .container {
+            padding: 10px;
+            overflow-x: hidden;
+        }
+
+        .grid {
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: 100vw !important;
+            padding: 15px;
+            gap: 8px;
+            border-radius: 16px;
+            box-sizing: border-box;
+            grid-template-columns: repeat(2, 1fr) !important;
+            background: #00254080;
+            border: 3px solid #004080;
+        }
+
+        .card {
+            border-radius: 12px;
+            height: 120px;
+            padding: 8px;
+            min-width: 0;
+            max-width: none;
+            border: 3px solid #004080;
+            background: rgb(0, 0, 0);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .card img {
+            border-radius: 8px;
+            width: 85%;
+            height: 85%;
+        }
+
+        .container h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+    }
+
+    @media (max-width: 320px) {
+        .container {
+            padding: 8px;
+        }
+
+        .grid {
+            background: #00254080;
+            gap: 8px;
+            padding: 12px;
+            border-radius: 12px;
+            grid-template-columns: repeat(2, 1fr) !important;
+            border: 3px solid #004080;
+        }
+
+        .card {
+            height: 100px;
+            padding: 8px;
+            border-radius: 8px;
+            border: 3px solid #004080;
+            background: rgb(0, 0, 0);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .container h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+    }
+
+    .card:active {
+        transform: translateY(-4px) scale(0.98);
+    }
+
+    @media (max-width: 767px) {
+        .category-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 8px;
+            padding: 8px;
+        }
+
+        .category-item {
+            height: 120px !important;
+            width: 100% !important;
+        }
+
+        .category-label {
+            font-size: 1rem;
+            padding: 8px 0 6px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .assurance-items {
+            display: flex !important;
+            flex-direction: row !important;
+            overflow-x: auto !important;
+            gap: 12px;
+            padding: 10px 0 10px 0;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            justify-content: flex-start !important;
+            align-items: stretch !important;
+            scroll-padding-left: 100px;
+        }
+
+        .assurance-items-inner {
+            display: flex !important;
+            flex-direction: row !important;
+            gap: 12px;
+            min-width: max-content;
+            justify-content: flex-start !important;
+            align-items: stretch !important;
+        }
+
+        .assurance-item {
+            min-width: 140px !important;
+            max-width: 160px !important;
+            flex: 0 0 auto;
+            margin-top: 30px;
+            scroll-snap-align: start;
+            padding: 10px 6px;
+            border-radius: 12px;
+        }
+
+        .assurance-items-inner .assurance-item:first-child {
+            margin-left: 16px !important;
+        }
+
+        .assurance-icon {
+            width: 80px !important;
+            height: 80px !important;
+        }
+
+        .assurance-icon img {
+            width: 80px !important;
+            height: 80px !important;
+            max-width: 80px !important;
+            max-height: 80px !important;
+        }
+    }
+
+    .popup {
+        position: fixed;
+        display: none;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 1000;
+    }
+
+    .popup-content {
+        background: linear-gradient(135deg, #ffffff, #f8f9fa);
+        padding: 30px;
+        width: 90%;
+        max-width: 420px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        animation: fadeIn 0.4s ease-in-out;
+        border: 3px solid #002540;
+    }
+
+    .popup-subtitle {
+        color: #666;
+        font-size: 16px;
+        margin: 10px 0;
+        font-weight: 500;
+    }
+
+    .code-box {
+        font-size: 28px;
+        font-weight: bold;
+        margin: 20px 0;
+        color: #002540;
+        background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+        padding: 20px;
+        border-radius: 15px;
+        border: 3px solid #1976d2;
+        letter-spacing: 3px;
+        box-shadow: 0 4px 15px rgba(25, 118, 210, 0.2);
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .discount {
+        color: #e91e63;
+        font-size: 24px;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px rgba(233, 30, 99, 0.2);
+    }
+
+    .popup-note {
+        color: #888;
+        font-size: 12px;
+        margin: 15px 0;
+        font-style: italic;
+    }
+
+    .btn {
+        margin-top: 20px;
+        padding: 15px 30px;
+        background: linear-gradient(135deg, #002540, #004080);
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 37, 64, 0.3);
+    }
+
+    .btn:hover {
+        background: linear-gradient(135deg, #004080, #0066cc);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0, 37, 64, 0.4);
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    @media (max-width: 575px) {
+        .popup-content {
+            width: 95%;
+            max-width: 350px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 25px 20px;
+        }
+
+        .popup-subtitle {
+            font-size: 14px;
+        }
+
+        .code-box {
+            font-size: 24px;
+            padding: 15px;
+            letter-spacing: 2px;
+        }
+
+        .discount {
+            font-size: 22px;
+        }
+
+        .popup-note {
+            font-size: 11px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            font-size: 15px;
+        }
+    }
+
+    .popup-subtitle {
+        font-size: 14px;
+    }
+
+    .code-box {
+        font-size: 24px;
+        padding: 15px;
+        letter-spacing: 2px;
+    }
+
+    .discount {
+        font-size: 22px;
+    }
+
+    .popup-note {
+        font-size: 11px;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        font-size: 15px;
+    }
+
+
+    .paper-rain-container {
+        pointer-events: none;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        z-index: 1001;
+        overflow: hidden;
+    }
+
+    .paper-piece {
+        position: absolute;
+        width: 10px;
+        height: 14px;
+        border-radius: 2px;
+        opacity: 0.9;
+        animation: random-paper-fall 2s linear infinite;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    }
+
+    .paper-rain-1 {
+        left: 8%;
+        animation-delay: 0s;
+        animation-name: random-paper-fall-1;
+    }
+
+    .paper-rain-2 {
+        left: 12%;
+        animation-delay: 0.4s;
+        animation-name: random-paper-fall-2;
+    }
+
+    .paper-rain-3 {
+        left: 18%;
+        animation-delay: 0.8s;
+        animation-name: random-paper-fall-3;
+    }
+
+    .paper-rain-4 {
+        left: 22%;
+        animation-delay: 1.2s;
+        animation-name: random-paper-fall-1;
+    }
+
+    .paper-rain-5 {
+        left: 28%;
+        animation-delay: 0.2s;
+        animation-name: random-paper-fall-2;
+    }
+
+    .paper-rain-6 {
+        left: 35%;
+        animation-delay: 0.6s;
+        animation-name: random-paper-fall-3;
+    }
+
+    .paper-rain-7 {
+        left: 42%;
+        animation-delay: 1.0s;
+        animation-name: random-paper-fall-1;
+    }
+
+    .paper-rain-8 {
+        left: 48%;
+        animation-delay: 1.4s;
+        animation-name: random-paper-fall-2;
+    }
+
+    .paper-rain-9 {
+        left: 55%;
+        animation-delay: 0.3s;
+        animation-name: random-paper-fall-3;
+    }
+
+    .paper-rain-10 {
+        left: 62%;
+        animation-delay: 0.7s;
+        animation-name: random-paper-fall-1;
+    }
+
+    .paper-rain-11 {
+        left: 68%;
+        animation-delay: 1.1s;
+        animation-name: random-paper-fall-2;
+    }
+
+    .paper-rain-12 {
+        left: 75%;
+        animation-delay: 1.5s;
+        animation-name: random-paper-fall-3;
+    }
+
+    .paper-rain-13 {
+        left: 82%;
+        animation-delay: 0.1s;
+        animation-name: random-paper-fall-1;
+    }
+
+    .paper-rain-14 {
+        left: 88%;
+        animation-delay: 0.5s;
+        animation-name: random-paper-fall-2;
+    }
+
+    .paper-rain-15 {
+        left: 92%;
+        animation-delay: 0.9s;
+        animation-name: random-paper-fall-3;
+    }
+
+    .paper-rain-16 {
+        left: 15%;
+        animation-delay: 1.3s;
+        animation-name: random-paper-fall-1;
+    }
+
+    .paper-rain-17 {
+        left: 25%;
+        animation-delay: 0.4s;
+        animation-name: random-paper-fall-2;
+    }
+
+    .paper-rain-18 {
+        left: 38%;
+        animation-delay: 0.8s;
+        animation-name: random-paper-fall-3;
+    }
+
+    .paper-rain-19 {
+        left: 52%;
+        animation-delay: 1.2s;
+        animation-name: random-paper-fall-1;
+    }
+
+    .paper-rain-20 {
+        left: 65%;
+        animation-delay: 0.2s;
+        animation-name: random-paper-fall-2;
+    }
+
+    .paper-rain-21 {
+        left: 78%;
+        animation-delay: 0.6s;
+        animation-name: random-paper-fall-3;
+    }
+
+    .paper-rain-22 {
+        left: 85%;
+        animation-delay: 1.0s;
+        animation-name: random-paper-fall-1;
+    }
+
+    .paper-rain-23 {
+        left: 5%;
+        animation-delay: 1.4s;
+        animation-name: random-paper-fall-2;
+    }
+
+    .paper-rain-24 {
+        left: 20%;
+        animation-delay: 0.3s;
+        animation-name: random-paper-fall-3;
+    }
+
+    .paper-rain-25 {
+        left: 32%;
+        animation-delay: 0.7s;
+        animation-name: random-paper-fall-1;
+    }
+
+    .paper-rain-26 {
+        left: 45%;
+        animation-delay: 1.1s;
+        animation-name: random-paper-fall-2;
+    }
+
+    .paper-rain-27 {
+        left: 58%;
+        animation-delay: 1.5s;
+        animation-name: random-paper-fall-3;
+    }
+
+    .paper-rain-28 {
+        left: 72%;
+        animation-delay: 0.1s;
+        animation-name: random-paper-fall-1;
+    }
+
+    .paper-rain-29 {
+        left: 80%;
+        animation-delay: 0.5s;
+        animation-name: random-paper-fall-2;
+    }
+
+    .paper-rain-30 {
+        left: 90%;
+        animation-delay: 0.9s;
+        animation-name: random-paper-fall-3;
+    }
+
+    .paper-rain-31 {
+        left: 10%;
+        animation-delay: 1.3s;
+        animation-name: random-paper-fall-1;
+    }
+
+    .paper-rain-32 {
+        left: 30%;
+        animation-delay: 0.4s;
+        animation-name: random-paper-fall-2;
+    }
+
+    .paper-rain-33 {
+        left: 50%;
+        animation-delay: 0.8s;
+        animation-name: random-paper-fall-3;
+    }
+
+    .paper-rain-34 {
+        left: 70%;
+        animation-delay: 1.2s;
+        animation-name: random-paper-fall-1;
+    }
+
+    .paper-rain-35 {
+        left: 85%;
+        animation-delay: 0.2s;
+        animation-name: random-paper-fall-2;
+    }
+
+    .paper-rain-36 {
+        left: 95%;
+        animation-delay: 0.6s;
+        animation-name: random-paper-fall-3;
+    }
+
+    .paper-rain-37 {
+        left: 7%;
+        animation-delay: 1.0s;
+        animation-name: random-paper-fall-1;
+    }
+
+    .paper-rain-38 {
+        left: 23%;
+        animation-delay: 1.4s;
+        animation-name: random-paper-fall-2;
+    }
+
+    .paper-rain-39 {
+        left: 40%;
+        animation-delay: 0.3s;
+        animation-name: random-paper-fall-3;
+    }
+
+    .paper-rain-40 {
+        left: 60%;
+        animation-delay: 0.7s;
+        animation-name: random-paper-fall-1;
+    }
+
+    .paper-rain-1,
+    .paper-rain-8,
+    .paper-rain-15,
+    .paper-rain-22,
+    .paper-rain-29,
+    .paper-rain-36 {
+        background: #8B5CF6;
+    }
+
+    .paper-rain-2,
+    .paper-rain-9,
+    .paper-rain-16,
+    .paper-rain-23,
+    .paper-rain-30,
+    .paper-rain-37 {
+        background: #4F46E5;
+    }
+
+    .paper-rain-3,
+    .paper-rain-10,
+    .paper-rain-17,
+    .paper-rain-24,
+    .paper-rain-31,
+    .paper-rain-38 {
+        background: #3B82F6;
+    }
+
+    .paper-rain-4,
+    .paper-rain-11,
+    .paper-rain-18,
+    .paper-rain-25,
+    .paper-rain-32,
+    .paper-rain-39 {
+        background: #10B981;
+    }
+
+    /* Green */
+    .paper-rain-5,
+    .paper-rain-12,
+    .paper-rain-19,
+    .paper-rain-26,
+    .paper-rain-33,
+    .paper-rain-40 {
+        background: #F59E0B;
+    }
+
+    /* Yellow */
+    .paper-rain-6,
+    .paper-rain-13,
+    .paper-rain-20,
+    .paper-rain-27,
+    .paper-rain-34 {
+        background: #F97316;
+    }
+
+    /* Orange */
+    .paper-rain-7,
+    .paper-rain-14,
+    .paper-rain-21,
+    .paper-rain-28,
+    .paper-rain-35 {
+        background: #EF4444;
+    }
+
+    /* Red */
+
+    /* Three different random fall patterns */
+    @keyframes random-paper-fall-1 {
+        0% {
+            opacity: 0;
+            transform: translateY(-30px) translateX(0px) rotateZ(0deg) scale(0.8);
+        }
+
+        15% {
+            opacity: 0.9;
+            transform: translateY(10vh) translateX(-15px) rotateZ(45deg) scale(1);
+        }
+
+        30% {
+            opacity: 0.9;
+            transform: translateY(25vh) translateX(20px) rotateZ(90deg) scale(1.1);
+        }
+
+        45% {
+            opacity: 0.9;
+            transform: translateY(40vh) translateX(-10px) rotateZ(135deg) scale(1);
+        }
+
+        60% {
+            opacity: 0.9;
+            transform: translateY(55vh) translateX(25px) rotateZ(180deg) scale(0.9);
+        }
+
+        75% {
+            opacity: 0.9;
+            transform: translateY(70vh) translateX(-20px) rotateZ(225deg) scale(1);
+        }
+
+        90% {
+            opacity: 0.9;
+            transform: translateY(85vh) translateX(15px) rotateZ(270deg) scale(0.8);
+        }
+
+        100% {
+            opacity: 0;
+            transform: translateY(110vh) translateX(-25px) rotateZ(360deg) scale(0.7);
+        }
+    }
+
+    @keyframes random-paper-fall-2 {
+        0% {
+            opacity: 0;
+            transform: translateY(-30px) translateX(0px) rotateZ(0deg) scale(0.8);
+        }
+
+        20% {
+            opacity: 0.9;
+            transform: translateY(15vh) translateX(25px) rotateZ(60deg) scale(1);
+        }
+
+        40% {
+            opacity: 0.9;
+            transform: translateY(35vh) translateX(-30px) rotateZ(120deg) scale(1.1);
+        }
+
+        60% {
+            opacity: 0.9;
+            transform: translateY(55vh) translateX(35px) rotateZ(180deg) scale(1);
+        }
+
+        80% {
+            opacity: 0.9;
+            transform: translateY(75vh) translateX(-40px) rotateZ(240deg) scale(0.9);
+        }
+
+        100% {
+            opacity: 0;
+            transform: translateY(110vh) translateX(45px) rotateZ(360deg) scale(0.7);
+        }
+    }
+
+    @keyframes random-paper-fall-3 {
+        0% {
+            opacity: 0;
+            transform: translateY(-30px) translateX(0px) rotateZ(0deg) scale(0.8);
+        }
+
+        25% {
+            opacity: 0.9;
+            transform: translateY(20vh) translateX(-20px) rotateZ(90deg) scale(1);
+        }
+
+        50% {
+            opacity: 0.9;
+            transform: translateY(45vh) translateX(30px) rotateZ(180deg) scale(1.1);
+        }
+
+        75% {
+            opacity: 0.9;
+            transform: translateY(70vh) translateX(-35px) rotateZ(270deg) scale(0.9);
+        }
+
+        100% {
+            opacity: 0;
+            transform: translateY(110vh) translateX(40px) rotateZ(360deg) scale(0.7);
+        }
+    }
+
+    
+    .animated-popup {
+        animation: popup-bounce-in 0.8s cubic-bezier(.68, -0.55, .27, 1.55);
+        will-change: transform, opacity;
+    }
+
+    @keyframes popup-bounce-in {
+        0% {
+            opacity: 0;
+            transform: scale(0.7) translateY(60px);
+        }
+
+        60% {
+            opacity: 1;
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        80% {
+            transform: scale(0.97) translateY(4px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+    }
+
+    
+    .popup-close-btn {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        width: 35px;
+        height: 35px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(212, 175, 55, 0.3);
+        border-radius: 50%;
+        color: #ffe082;
+        font-size: 24px;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        z-index: 10;
+    }
+
+    .popup-close-btn:hover {
+        background: rgba(212, 175, 55, 0.2);
+        border-color: #d4af37;
+        color: #fff;
+        transform: scale(1.1);
+    }
+
+    .popup-close-btn:active {
+        transform: scale(0.95);
+    }
+
+    
+    .luxury-popup-bg {
+        background: linear-gradient(135deg, #0a1836 0%, #1a2a4f 100%);
+        border: 1.5px solid rgba(212, 175, 55, 0.18);
+        
+        box-shadow: 0 10px 40px rgba(10, 24, 54, 0.25), 0 0 0 1.5px #d4af3722 inset;
+        backdrop-filter: blur(18px) saturate(160%);
+        -webkit-backdrop-filter: blur(18px) saturate(160%);
+        color: #fff;
+        position: relative;
+    }
+
+    .luxury-popup-bg:before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 20px;
+        box-shadow: 0 0 60px 10px #d4af3722 inset;
+        pointer-events: none;
+    }
+
+    
+    .luxury-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.1rem;
+        font-weight: 700;
+        color: #ffe082;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+    }
+
+    .luxury-subtitle {
+        color: #e0e0e0;
+        font-size: 1.1rem;
+        font-family: 'Montserrat', sans-serif;
+        margin-bottom: 18px;
+    }
+
+    .luxury-discount {
+        color: #fffde7;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.3rem;
+        margin: 18px 0 8px 0;
+    }
+
+    .luxury-discount-span {
+        color: #ffd700;
+        font-weight: 700;
+        font-size: 1.5em;
+        text-shadow: 0 2px 8px #d4af3740;
+    }
+
+    .luxury-note {
+        color: #bdbdbd;
+        font-size: 0.95em;
+        font-style: italic;
+        margin-bottom: 10px;
+    }
+
+    
+    .luxury-code-box {
+        background: #fff;
+        color: #0a1836;
+        font-family: 'Roboto Mono', 'Menlo', monospace;
+        font-size: 1.6em;
+        font-weight: 700;
+        border: 2px solid #d4af37;
+        border-radius: 12px;
+        padding: 18px 0;
+        margin: 0 auto 18px auto;
+        width: 70%;
+        box-shadow: 0 2px 16px 0 #d4af3722, 0 1.5px 0 #fff8 inset;
+        letter-spacing: 0.18em;
+        transition: box-shadow 0.3s;
+    }
+
+    .luxury-code-box:focus,
+    .luxury-code-box:hover {
+        box-shadow: 0 4px 24px 0 #d4af3755, 0 1.5px 0 #fff8 inset;
+    }
+
+    
+    .luxury-btn {
+        background: #d4af37;
+        color: #0a1836;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.1em;
+        font-weight: 600;
+        border: none;
+        border-radius: 10px;
+        padding: 14px 36px;
+        margin-top: 18px;
+        box-shadow: 0 2px 12px #d4af3740;
+        position: relative;
+        overflow: hidden;
+        transition: background 0.3s, color 0.3s, box-shadow 0.3s, transform 0.2s;
+    }
+
+    .luxury-btn:after {
+        background: rgba(212, 175, 55, 0.12);
+    }
+
+    .luxury-btn:hover {
+        background: #bfa133;
+        color: #fffde7;
+        box-shadow: 0 6px 24px #d4af3740;
+        transform: translateY(-2px) scale(1.03);
+    }
+
+    .luxury-btn:active {
+        transform: scale(0.98);
+    }
+
+    
+    @media (max-width: 575px) {
+        .popup-content {
+            padding: 18px 4px;
+            max-width: 98vw;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .luxury-title {
+            font-size: 1.3rem;
+        }
+
+        .luxury-code-box {
+            font-size: 1.1em;
+            padding: 12px 0;
+            width: 95%;
+        }
+
+        .luxury-btn {
+            font-size: 1em;
+            padding: 12px 18px;
+        }
+
+        .popup-close-btn {
+            top: 10px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+        }
+    }
+
+    
+    @media (max-width: 375px) {
+        .popup-content {
+            width: 98%;
+            max-width: 320px;
+            padding: 15px 10px;
+        }
+
+        .luxury-title {
+            font-size: 1.1rem;
+        }
+
+        .luxury-code-box {
+            font-size: 1em;
+            padding: 10px 0;
+            width: 98%;
+        }
+
+        .luxury-btn {
+            font-size: 0.9em;
+            padding: 10px 15px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="hero-container">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto">
+        <source src="{% static 'jewelry/videos/bg.mp4' %}" type="video/mp4" />
+        Your browser does not support the video tag.
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1 class="hero-title">Welcome to Raivat Stones</h1>
+        <p class="hero-subtitle">A Symbol Of Integrity, Purity, And Responsibility</p>
+    </div>
+</div>
+
+
+<div id="popup" class="popup">
+    <div class="paper-rain-container">
+        
+        <div class="paper-piece paper-rain-1"></div>
+        <div class="paper-piece paper-rain-2"></div>
+        <div class="paper-piece paper-rain-3"></div>
+        <div class="paper-piece paper-rain-4"></div>
+        <div class="paper-piece paper-rain-5"></div>
+        <div class="paper-piece paper-rain-6"></div>
+        <div class="paper-piece paper-rain-7"></div>
+        <div class="paper-piece paper-rain-8"></div>
+        <div class="paper-piece paper-rain-9"></div>
+        <div class="paper-piece paper-rain-10"></div>
+        <div class="paper-piece paper-rain-11"></div>
+        <div class="paper-piece paper-rain-12"></div>
+        <div class="paper-piece paper-rain-13"></div>
+        <div class="paper-piece paper-rain-14"></div>
+        <div class="paper-piece paper-rain-15"></div>
+        <div class="paper-piece paper-rain-16"></div>
+        <div class="paper-piece paper-rain-17"></div>
+        <div class="paper-piece paper-rain-18"></div>
+        <div class="paper-piece paper-rain-19"></div>
+        <div class="paper-piece paper-rain-20"></div>
+        <div class="paper-piece paper-rain-21"></div>
+        <div class="paper-piece paper-rain-22"></div>
+        <div class="paper-piece paper-rain-23"></div>
+        <div class="paper-piece paper-rain-24"></div>
+        <div class="paper-piece paper-rain-25"></div>
+        <div class="paper-piece paper-rain-26"></div>
+        <div class="paper-piece paper-rain-27"></div>
+        <div class="paper-piece paper-rain-28"></div>
+        <div class="paper-piece paper-rain-29"></div>
+        <div class="paper-piece paper-rain-30"></div>
+        <div class="paper-piece paper-rain-31"></div>
+        <div class="paper-piece paper-rain-32"></div>
+        <div class="paper-piece paper-rain-33"></div>
+        <div class="paper-piece paper-rain-34"></div>
+        <div class="paper-piece paper-rain-35"></div>
+        <div class="paper-piece paper-rain-36"></div>
+        <div class="paper-piece paper-rain-37"></div>
+        <div class="paper-piece paper-rain-38"></div>
+        <div class="paper-piece paper-rain-39"></div>
+        <div class="paper-piece paper-rain-40"></div>
+    </div>
+    <div class="popup-content animated-popup luxury-popup-bg">
+        <button onclick="closePopup()" class="popup-close-btn">×</button>
+        <h2 class="luxury-title">🎁 Exclusive Offer</h2>
+        <p class="popup-subtitle luxury-subtitle">Use this code for instant savings:</p>
+        <div id="code" class="code-box luxury-code-box">{{ code }}</div>
+        <h3 class="luxury-discount">Get <span class="discount luxury-discount-span">{{ percentage }}%</span> OFF Your
+            Purchase!</h3>
+        <p class="popup-note luxury-note">*Valid on all Jewelry items.</p>
+        <button onclick="openWhatsApp()" class="btn animated-btn luxury-btn">Claim My Discount!</button>
+        <button onclick="copyMessage()" class="btn animated-btn luxury-btn"
+            style="margin-top: 10px; background: linear-gradient(135deg, #10b981, #059669);">Copy Message</button>
+        <button onclick="callPhone()" class="btn animated-btn luxury-btn"
+            style="margin-top: 10px; background: linear-gradient(135deg, #3b82f6, #2563eb);">Call Us</button>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Every Masterpiece, One Destination.</h>
+        <div class="grid">
+            <div class="card">
+                <img src="{% static 'jewelry/images/1.png' %}" alt="Pendants" />
+            </div>
+            <div class="card">
+                <img src="{% static 'jewelry/images/2.png' %}" alt="Necklaces" />
+            </div>
+            <div class="card">
+                <img src="{% static 'jewelry/images/3.png' %}" alt="Rings" />
+            </div>
+            <div class="card">
+                <img src="{% static 'jewelry/images/4.png' %}" alt="Bangles" />
+            </div>
+            <div class="card">
+                <img src="{% static 'jewelry/images/5.png' %}" alt="Earrings" />
+            </div>
+            <div class="card">
+                <img src="{% static 'jewelry/images/6.png' %}" alt="Anklets" />
+            </div>
+            <div class="card">
+                <img src="{% static 'jewelry/images/7.png' %}" alt="Mangalsutras" />
+            </div>
+            <div class="card">
+                <img src="{% static 'jewelry/images/8.png' %}" alt="Bracelets" />
+            </div>
+        </div>
+</div>
+
+<h1 class="category-title">Category</h1>
+<p class="category-subtitle">A Sparkle of Purity, Guided by Purpose and Grace.</p>
+
+<div class="category-grid">
+    <div class="category-col">
+        <a href="{% url 'category' %}" class="category-item wedding">
+            <img src="{% static 'jewelry/images/wedding.png' %}" alt="Wedding" />
+            <div class="category-label">Gold</div>
+        </a>
+        <a href="{% url 'collections' %}?category=engagement" class="category-item gold">
+            <img src="{% static 'jewelry/images/engagement.png' %}" alt="Gold" />
+            <div class="category-label">Anniversary</div>
+        </a>
+    </div>
+    <div class="category-col">
+        <a href="{% url 'diamond' %}" class="category-item diamond">
+            <img src="{% static 'jewelry/images/diamond.png' %}" alt="Diamond" />
+            <div class="category-label">Diamond</div>
+        </a>
+        <a href="{% url 'collections' %}?category=daily-wear" class="category-item daily">
+            <img src="{% static 'jewelry/images/dailywear.png' %}" alt="Dailywear" />
+            <div class="category-label">Dailywear</div>
+        </a>
+    </div>
+</div>
+
+<div class="assurance-section">
+    <div class="assurance-content">
+        <h2 class="assurance-title">The Raivat Stones Assurance</h2>
+        <p class="assurance-desc">Crafted with passion, guaranteed with trust.</p>
+        <div class="assurance-items">
+            <div class="assurance-items-inner">
+                <div class="assurance-item">
+                    <div class="assurance-icon">
+                        <img src="{% static 'jewelry/images/bis-hallmark.png' %}" alt="BIS Hallmark" />
+                    </div>
+                    <p>BIS Hallmark</p>
+                </div>
+                <div class="assurance-item">
+                    <div class="assurance-icon">
+                        <img src="{% static 'jewelry/images/purity-guarantee.png' %}" alt="Purity Guarantee" />
+                    </div>
+                    <p>Purity Guarantee</p>
+                </div>
+                <div class="assurance-item">
+                    <div class="assurance-icon">
+                        <img src="{% static 'jewelry/images/certified-diamonds.png' %}" alt="Certified Diamonds/Gems" />
+                    </div>
+                    <p>Certified Diamonds/Gems</p>
+                </div>
+                <div class="assurance-item">
+                    <div class="assurance-icon">
+                        <img src="{% static 'jewelry/images/customization.png' %}" alt="Customization Available" />
+                    </div>
+                    <p>Customization Available</p>
+                </div>
+                <div class="assurance-item">
+                    <div class="assurance-icon">
+                        <img src="{% static 'jewelry/images/247.png' %}" alt="Free Cleaning Service" />
+                    </div>
+                    <p>24 / 7 Service</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="story-section">
+        <div class="story-image">
+            <img src="{% static 'jewelry/images/bgsf.png' %}" alt="About Us" />
+            <div class="story-overlay"></div>
+            <div class="story-content">
+                <h2>Our Story</h2>
+                <p>Every creation begins with purpose—where passion, precision, and heritage unite to define who we are.
+                </p>
+                <a href="{% url 'about' %}" class="story-btn">Learn More</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{% csrf_token %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        
+        const sideMenu = document.querySelector('.side-menu');
+        const sideMenuOverlay = document.querySelector('.side-menu-overlay');
+        const sideMenuClose = document.querySelector('.side-menu-close');
+        const mobileMenuBtn2 = document.querySelector('.mobile-menu-btn');
+        function openSideMenu() {
+            sideMenu.classList.add('open');
+            sideMenuOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeSideMenu() {
+            sideMenu.classList.remove('open');
+            sideMenuOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        mobileMenuBtn2.addEventListener('click', openSideMenu);
+        sideMenuClose.addEventListener('click', closeSideMenu);
+        sideMenuOverlay.addEventListener('click', closeSideMenu);
+        document.querySelectorAll('.side-menu-links a').forEach(link => {
+            link.addEventListener('click', closeSideMenu);
+        });
+
+        
+        {% if show_popup %}
+        window.onload = function () {
+            document.getElementById('popup').style.display = 'block';
+        };
+        {% endif %}
+    });
+
+    function closePopup() {
+        document.getElementById('popup').style.display = 'none';
+    }
+
+    function openWhatsApp() {
+        
+        const code = document.getElementById('code').textContent;
+        const percentage = document.querySelector('.luxury-discount-span').textContent;
+
+        
+        const message = `Hi! I want to claim my ${percentage} discount using code: ${code}`;
+
+        
+        const encodedMessage = encodeURIComponent(message);
+
+        
+        const phoneNumber = '8141963637'; 
+
+        
+        const whatsappURLs = [
+            `https://wa.me/${phoneNumber}?text=${encodedMessage}`,
+            `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`,
+            `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`,
+            `whatsapp://send?phone=${phoneNumber}&text=${encodedMessage}`
+        ];
+
+        
+        fetch('{% url "claim_discount" %}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('Discount claimed successfully:', data.message);
+                } else {
+                    console.log('Error claiming discount:', data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+        
+        let opened = false;
+
+        
+        try {
+            const win = window.open(whatsappURLs[0], '_blank');
+            if (win) {
+                opened = true;
+            }
+        } catch (e) {
+            console.log('First WhatsApp URL failed, trying fallback...');
+        }
+
+        
+        if (!opened) {
+            setTimeout(() => {
+                try {
+                    window.open(whatsappURLs[1], '_blank');
+                } catch (e) {
+                    console.log('Second WhatsApp URL failed, trying third...');
+                    try {
+                        window.open(whatsappURLs[2], '_blank');
+                    } catch (e) {
+                        console.log('All WhatsApp URLs failed, showing manual instructions');
+                        
+                        alert(`WhatsApp couldn't open automatically. Please:\n\n1. Open WhatsApp\n2. Send this message to ${phoneNumber}:\n\n${message}`);
+                    }
+                }
+            }, 100);
+        }
+
+        
+        closePopup();
+    }
+
+    function copyMessage() {
+
+        const code = document.getElementById('code').textContent;
+        const percentage = document.querySelector('.luxury-discount-span').textContent;
+
+        
+        const message = `Hi! I want to claim my ${percentage} discount using code: ${code}`;
+
+        
+        navigator.clipboard.writeText(message).then(function () {
+            
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = 'Message Copied!';
+            button.style.background = 'linear-gradient(135deg, #059669, #047857)';
+
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+            }, 2000);
+
+            
+            fetch('{% url "claim_discount" %}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        console.log('Discount claimed successfully:', data.message);
+                    } else {
+                        console.log('Error claiming discount:', data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+        }).catch(function (err) {
+            
+            const textArea = document.createElement('textarea');
+            textArea.value = message;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+
+            alert('Message copied to clipboard! You can now paste it in WhatsApp.');
+        });
+    }
+
+    function callPhone() {
+        const phoneNumber = '8141963637';
+        window.location.href = `tel:${phoneNumber}`;
+
+
+        fetch('{% url "claim_discount" %}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('Discount claimed successfully:', data.message);
+                } else {
+                    console.log('Error claiming discount:', data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+</script>
+{% endblock %}

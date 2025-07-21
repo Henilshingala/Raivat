@@ -1,0 +1,60 @@
+from django.urls import path
+from django.shortcuts import render
+
+from . import views
+from .views import round_diamond_size_chart, princess_diamond_size_chart, asscher_diamond_size_chart, cusion_diamond_size_chart, emrald_diamond_size_chart, heart_diamond_size_chart, marquise_diamond_size_chart, oval_diamond_size_chart, pear_diamond_size_chart, rec_cusion_diamond_size_chart, square_radint_diamond_size_chart, radiant_diamond_size_chart, trillion_diamond_size_chart, baguette_diamond_size_chart, hexagon_diamond_size_chart, lozenge_diamond_size_chart, shield_diamond_size_chart, tapered_baguette_diamond_size_chart, briolette_diamond_size_chart, half_moon_diamond_size_chart, square_caution_diamond_size_chart, coffin_diamond_size_chart, bullet_diamond_size_chart, trapezoid_diamond_size_chart, square_radiant_diamond_size_chart
+
+urlpatterns = [
+    path("", views.home, name="home"),
+    path("about/", views.about, name="about"),
+    path("diamond/", views.diamond, name="diamond"),
+    path("product/", views.product, name="product"),
+    path("collections/", views.collections, name="collections"),
+    path("category/", views.category_page, name="category"),
+    path("contact/", views.contact, name="contact"),
+    path("faq/", views.faq, name="faq"),
+    path("policies/", views.policies, name="policies"),
+    path("payment_page/", views.payment_page, name="payment_page"),
+    path("signup/", views.signup, name="signup"),
+    path("check-email/", views.check_email, name="check_email"),
+    path("login/", views.login_view, name="login"),
+    path("logout/", views.logout_view, name="logout"),
+    path("forgot-password/", views.forgot_password_view, name="forgot_password"),
+    path("verify-otp/", views.otp_verification_view, name="verify_otp"),
+    path("reset-password/", views.reset_password_view, name="reset_password"),
+    path("account/", views.account, name="account"),
+    path("page-not-found/", views.page_not_found, name="page_not_found"),
+    path("maintenance/", views.maintenance, name="maintenance"),
+    path("claim-discount/", views.claim_discount, name="claim_discount"),
+    path("about-lab-groun/", views.about_lab_groun, name="about_lab_groun"),
+    path("diamond-size-chart/", views.diamond_size_chart, name="Diamond-size-chart"),
+    path("create-order/", views.create_order, name="create_order"),
+]
+
+urlpatterns += [
+    path('round-diamond-size-chart/', round_diamond_size_chart, name='round_diamond_size_chart'),
+    path('princess-diamond-size-chart/', princess_diamond_size_chart, name='princess_diamond_size_chart'),
+    path('asscher-diamond-size-chart/', asscher_diamond_size_chart, name='asscher_diamond_size_chart'),
+    path('cusion-diamond-size-chart/', cusion_diamond_size_chart, name='cusion_diamond_size_chart'),
+    path('emrald-diamond-size-chart/', emrald_diamond_size_chart, name='emrald_diamond_size_chart'),
+    path('heart-diamond-size-chart/', heart_diamond_size_chart, name='heart_diamond_size_chart'),
+    path('marquise-diamond-size-chart/', marquise_diamond_size_chart, name='marquise_diamond_size_chart'),
+    path('oval-diamond-size-chart/', oval_diamond_size_chart, name='oval_diamond_size_chart'),
+    path('pear-diamond-size-chart/', pear_diamond_size_chart, name='pear_diamond_size_chart'),
+    path('rec-cusion-diamond-size-chart/', rec_cusion_diamond_size_chart, name='rec_cusion_diamond_size_chart'),
+    path('square-radint-diamond-size-chart/', square_radint_diamond_size_chart, name='square_radint_diamond_size_chart'),
+    path('radiant-diamond-size-chart/', radiant_diamond_size_chart, name='radiant_diamond_size_chart'),
+    path('trillion-diamond-size-chart/', trillion_diamond_size_chart, name='trillion_diamond_size_chart'),
+    path('baguette-diamond-size-chart/', baguette_diamond_size_chart, name='baguette_diamond_size_chart'),
+    path('hexagon-diamond-size-chart/', hexagon_diamond_size_chart, name='hexagon_diamond_size_chart'),
+    path('lozenge-diamond-size-chart/', lozenge_diamond_size_chart, name='lozenge_diamond_size_chart'),
+    path('shield-diamond-size-chart/', shield_diamond_size_chart, name='shield_diamond_size_chart'),
+    path('tapered-baguette-diamond-size-chart/', tapered_baguette_diamond_size_chart, name='tapered_baguette_diamond_size_chart'),
+    path('briolette-diamond-size-chart/', briolette_diamond_size_chart, name='briolette_diamond_size_chart'),
+    path('half-moon-diamond-size-chart/', half_moon_diamond_size_chart, name='half_moon_diamond_size_chart'),
+    path('square-caution-diamond-size-chart/', square_caution_diamond_size_chart, name='square_caution_diamond_size_chart'),
+    path('coffin-diamond-size-chart/', coffin_diamond_size_chart, name='coffin_diamond_size_chart'),
+    path('bullet-diamond-size-chart/', bullet_diamond_size_chart, name='bullet_diamond_size_chart'),
+    path('trapezoid-diamond-size-chart/', trapezoid_diamond_size_chart, name='trapezoid_diamond_size_chart'),
+    path('square-radiant-diamond-size-chart/', square_radiant_diamond_size_chart, name='square_radiant_diamond_size_chart'),
+]
